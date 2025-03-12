@@ -36,5 +36,18 @@
     <div class="emoji-art">
         ⛰️🌲🏁🔥🌙☕
     </div>
+    <script>
+        const texts = [
+            "🚧 En procés... Estigueu atents! 🚧", 
+            "🚧 En progreso... ¡Estad atentos! 🚧", 
+            "🚧 Work in Progress... Stay tuned! 🚧"
+        ];
+        let index = 0;
+        function changeLanguage() {
+            index = (index + 1) % texts.length;
+            document.getElementById("status-text").innerText = texts[index];
+        }
+        setInterval(changeLanguage, 4000);
+    </script>
 </body>
 </html>
