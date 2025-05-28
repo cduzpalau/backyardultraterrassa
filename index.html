@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Backyard Ultra Terrassa</title>
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         background-color: #121212;
         color: #ffffff;
@@ -14,19 +18,57 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh;
         margin: 0;
+        padding: 20px;
       }
+
       h1 {
-        font-size: 3rem;
+        font-size: 2.5rem;
         margin-bottom: 10px;
       }
+
       p {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+        margin: 10px 0;
       }
+
       .emoji-art {
         font-size: 2rem;
         margin-top: 20px;
+      }
+
+      .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        width: 100%;
+        max-width: 600px;
+      }
+
+      .logo-container img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
+
+        .emoji-art {
+          font-size: 1.5rem;
+        }
+
+        .logo-container img {
+          max-width: 80%;
+        }
       }
     </style>
   </head>
@@ -34,10 +76,14 @@
     <h1>🏃‍♂️ Backyard Ultra Terrassa 🏃‍♀️</h1>
     <p id="status-text">🚧 Work in Progress... Stay tuned! 🚧</p>
     <div class="emoji-art">⛰️🌲🏁🔥🌙☕</div>
-    <a href="https://www.instagram.com/backyardultraterrassa/" target="_blank">
-      <img src="logodarkmode.png" alt="Backyard Ultra Terrassa Logo" />
-    </a>
-
+    <div class="logo-container">
+      <a
+        href="https://www.instagram.com/backyardultraterrassa/"
+        target="_blank"
+      >
+        <img src="logodarkmode.png" alt="Backyard Ultra Terrassa Logo" />
+      </a>
+    </div>
     <script>
       const texts = [
         "🚧 En procés... Estigueu atents! 🚧",
