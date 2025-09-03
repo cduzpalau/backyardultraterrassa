@@ -157,7 +157,11 @@
         font-size: 1rem;
       }
       /* Tooltip */
-      .info { display: inline-flex; align-items: center; gap: 8px; }
+      .info {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
       .info-icon {
         display: inline-block;
         width: 18px;
@@ -209,7 +213,7 @@
     </style>
   </head>
   <body>
-        <div class="logo-container">
+    <div class="logo-container">
       <a
         href="https://www.instagram.com/backyardultraterrassa/"
         target="_blank"
@@ -221,46 +225,84 @@
     <p id="status-text">🚧 Work in Progress... Stay tuned! 🚧</p>
     <p id="std-text">Save the date 📅 - 14 March 2026</p>
 
-    <div id="prereg-card" class="card" role="region" aria-labelledby="prereg-title">
-      <div class="info" style="justify-content: space-between; align-items: start;">
+    <div
+      id="prereg-card"
+      class="card"
+      role="region"
+      aria-labelledby="prereg-title"
+    >
+      <div
+        class="info"
+        style="justify-content: space-between; align-items: start"
+      >
         <h2 id="prereg-title">Preregister for BYUT 2026</h2>
         <span class="info-icon" tabindex="0" aria-label="Info">
           i
           <span class="tooltip" role="tooltip">
-            Preregistration does not guarantee entry. Everyone who preregisters will
-            receive a personal email invitation to register before general
-            registration opens. Personal data is kept only for preregistration and
-            email reminders, and will be deleted when official registration opens
-            after reminder emails are sent.
+            Preregistration does not guarantee entry. Everyone who preregisters
+            will receive a personal email invitation to register before general
+            registration opens. Personal data is kept only for preregistration
+            and email reminders, and will be deleted when official registration
+            opens after reminder emails are sent.
           </span>
         </span>
       </div>
-      <p class="subtle">Please complete all fields and accept the data policy.</p>
+      <p class="subtle">
+        Please complete all fields and accept the data policy.
+      </p>
 
       <form id="prereg-form" novalidate>
         <div class="row">
           <div class="field">
             <label for="firstName">Name</label>
-            <input id="firstName" name="firstName" type="text" autocomplete="given-name" required />
+            <input
+              id="firstName"
+              name="firstName"
+              type="text"
+              autocomplete="given-name"
+              required
+            />
           </div>
           <div class="field">
             <label for="lastName">Last Name</label>
-            <input id="lastName" name="lastName" type="text" autocomplete="family-name" required />
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              autocomplete="family-name"
+              required
+            />
           </div>
         </div>
         <div class="field">
           <label for="email">Email</label>
-          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            required
+          />
         </div>
 
         <div class="checkbox">
           <input id="consent" name="consent" type="checkbox" required />
           <label for="consent">
-            I grant permission to store my personal data in accordance with applicable laws in Spain, solely for preregistration and reminder purposes. Data will be deleted when official registration opens after reminder emails are sent.
+            I grant permission to store my personal data in accordance with
+            applicable laws in Spain, solely for preregistration and reminder
+            purposes. Data will be deleted when official registration opens
+            after reminder emails are sent.
           </label>
         </div>
 
-        <div id="form-error" class="error" role="alert" aria-live="polite" style="display:none;"></div>
+        <div
+          id="form-error"
+          class="error"
+          role="alert"
+          aria-live="polite"
+          style="display: none"
+        ></div>
 
         <div class="actions">
           <button id="submit-btn" type="submit">Preregister</button>
@@ -269,9 +311,12 @@
       </form>
     </div>
 
-    <div id="prereg-success" class="card" style="display:none;">
+    <div id="prereg-success" class="card" style="display: none">
       <h2>You're on the list 🎉</h2>
-      <p class="success">Thank you for preregistering. We’ll email you a personal invitation before general registration opens.</p>
+      <p class="success">
+        Thank you for preregistering. We’ll email you a personal invitation
+        before general registration opens.
+      </p>
     </div>
 
     <script>
@@ -280,7 +325,11 @@
         "🚧 En progreso... ¡Estad atentos! 🚧",
         "🚧 Work in Progress... Stay tuned! 🚧",
       ];
-      const texts2 = ["Guarda't la data 📅 - 14 Març 2026","Guardate la fecha 📅 - 14 Marzo 2026","Save the date 📅 - 14 March 2026"]
+      const texts2 = [
+        "Guarda't la data 📅 - 14 Març 2026",
+        "Guardate la fecha 📅 - 14 Marzo 2026",
+        "Save the date 📅 - 14 March 2026",
+      ];
       let index = 0;
       function changeLanguage() {
         index = (index + 1) % texts.length;
@@ -292,26 +341,27 @@
       // ===== Preregistration form logic =====
       // Replace this with your deployed Google Apps Script Web App URL.
       // See the instructions in my message to set it up.
-      const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZ-JhiOcTNMJHmIlE8Px1VKaAXbfCiru8gnNIfgTOebIZlsDIQWnvSE9bu4nurOe9AIw/exec"; // e.g. https://script.google.com/macros/s/AKfycbx.../exec
+      const GOOGLE_APPS_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbyaLzTT7cJnRZO7NiBza-rC2XUIaRFlNeL089XgU64yitgywfUVGta7ISJpbr-JCnOtsw/exec"; // e.g. https://script.google.com/macros/s/AKfycbx.../exec
 
-      const form = document.getElementById('prereg-form');
-      const submitBtn = document.getElementById('submit-btn');
-      const errorBox = document.getElementById('form-error');
-      const statusText = document.getElementById('submit-status');
-      const successCard = document.getElementById('prereg-success');
-      const preregCard = document.getElementById('prereg-card');
+      const form = document.getElementById("prereg-form");
+      const submitBtn = document.getElementById("submit-btn");
+      const errorBox = document.getElementById("form-error");
+      const statusText = document.getElementById("submit-status");
+      const successCard = document.getElementById("prereg-success");
+      const preregCard = document.getElementById("prereg-card");
 
-      const STORAGE_KEY = 'byut_preregistered_email';
+      const STORAGE_KEY = "byut_preregistered_email";
 
       function showError(msg) {
         if (!errorBox) return;
-        errorBox.style.display = 'block';
+        errorBox.style.display = "block";
         errorBox.textContent = msg;
       }
       function clearError() {
         if (!errorBox) return;
-        errorBox.style.display = 'none';
-        errorBox.textContent = '';
+        errorBox.style.display = "none";
+        errorBox.textContent = "";
       }
       function isValidEmail(email) {
         // Simple robust email validation pattern
@@ -320,13 +370,16 @@
       }
       function setSubmitting(submitting) {
         if (submitBtn) submitBtn.disabled = submitting;
-        if (statusText) statusText.textContent = submitting ? 'Submitting…' : '';
+        if (statusText)
+          statusText.textContent = submitting ? "Submitting…" : "";
       }
       function showSuccess(email) {
-        if (preregCard) preregCard.style.display = 'none';
-        if (successCard) successCard.style.display = 'block';
+        if (preregCard) preregCard.style.display = "none";
+        if (successCard) successCard.style.display = "block";
         if (email) {
-          try { localStorage.setItem(STORAGE_KEY, String(email)); } catch (_) {}
+          try {
+            localStorage.setItem(STORAGE_KEY, String(email));
+          } catch (_) {}
         }
       }
 
@@ -338,44 +391,50 @@
         }
       } catch (_) {}
 
-      form?.addEventListener('submit', async (e) => {
+      form?.addEventListener("submit", async (e) => {
         e.preventDefault();
         clearError();
 
-        const firstName = document.getElementById('firstName')?.value?.trim() || '';
-        const lastName = document.getElementById('lastName')?.value?.trim() || '';
-        const email = document.getElementById('email')?.value?.trim() || '';
-        const consent = Boolean(document.getElementById('consent')?.checked);
+        const firstName =
+          document.getElementById("firstName")?.value?.trim() || "";
+        const lastName =
+          document.getElementById("lastName")?.value?.trim() || "";
+        const email = document.getElementById("email")?.value?.trim() || "";
+        const consent = Boolean(document.getElementById("consent")?.checked);
 
         if (!firstName || !lastName || !email) {
-          showError('Please complete all fields.');
+          showError("Please complete all fields.");
           return;
         }
         if (!isValidEmail(email)) {
-          showError('Please enter a valid email address.');
+          showError("Please enter a valid email address.");
           return;
         }
         if (!consent) {
-          showError('You must grant permission to store your data.');
+          showError("You must grant permission to store your data.");
           return;
         }
         if (!GOOGLE_APPS_SCRIPT_URL) {
-          showError('Submission endpoint is not configured yet.');
+          showError("Submission endpoint is not configured yet.");
           return;
         }
 
         setSubmitting(true);
         try {
+          // Send as URL-encoded to keep it a CORS simple request (no preflight)
+          const body = new URLSearchParams({ firstName, lastName, email });
           const resp = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ firstName, lastName, email })
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            },
+            body,
           });
           if (!resp.ok) {
             throw new Error(`Request failed: ${resp.status}`);
           }
           const data = await resp.json().catch(() => ({}));
-          if (data && (data.success === true || data.status === 'ok')) {
+          if (data && (data.success === true || data.status === "ok")) {
             showSuccess(email);
           } else {
             // Accept success if endpoint returns 200 without JSON contract
@@ -383,7 +442,9 @@
           }
         } catch (err) {
           console.error(err);
-          showError('There was a problem submitting your preregistration. Please try again later.');
+          showError(
+            "There was a problem submitting your preregistration. Please try again later."
+          );
         } finally {
           setSubmitting(false);
         }
