@@ -304,6 +304,16 @@
           style="display: none"
         ></div>
 
+        <!-- reCAPTCHA: replace with your site key -->
+        <div class="field">
+          <label for="captcha">Verification</label>
+          <div
+            class="g-recaptcha"
+            data-sitekey="6Lcm9L8rAAAAAEF5QyxE568jiw-XeEGT4VnvFsib"
+            data-theme="dark"
+          ></div>
+        </div>
+
         <div class="actions">
           <button id="submit-btn" type="submit">Preregister</button>
           <span id="submit-status" class="subtle" aria-live="polite"></span>
@@ -342,7 +352,7 @@
       // Replace this with your deployed Google Apps Script Web App URL.
       // See the instructions in my message to set it up.
       const GOOGLE_APPS_SCRIPT_URL =
-        "https://script.google.com/macros/s/AKfycbxS7FMvZ_lb2F9mp_zplnTuHJJH_VM89iAYmqkqlzcvKqD3nxK0gynqwn1SzIJ2cWZmgA/exec"; // e.g. https://script.google.com/macros/s/AKfycbx.../exec
+        "https://script.google.com/macros/s/AKfycbyuk796Zb0OVYbIiWXhFQ5faulVMIUXbsytUIN-uI79aCobz7CX9vhJsjIqVD5lh6lzxw/exec"; // e.g. https://script.google.com/macros/s/AKfycbx.../exec
 
       const form = document.getElementById("prereg-form");
       const submitBtn = document.getElementById("submit-btn");
@@ -422,7 +432,22 @@
         setSubmitting(true);
         try {
           // Send as URL-encoded to keep it a CORS simple request (no preflight)
-          const body = new URLSearchParams({ firstName, lastName, email });
+          // Captcha token (reCAPTCHA v2 checkbox)
+          const captchaToken =
+            typeof grecaptcha !== "undefined" && grecaptcha
+              ? grecaptcha.getResponse()
+              : "";
+          if (!captchaToken) {
+            showError("Please complete the CAPTCHA.");
+            return;
+          }
+
+          const body = new URLSearchParams({
+            firstName,
+            lastName,
+            email,
+            captcha: captchaToken,
+          });
           const resp = await fetch(GOOGLE_APPS_SCRIPT_URL, {
             method: "POST",
             headers: {
@@ -434,11 +459,20 @@
             throw new Error(`Request failed: ${resp.status}`);
           }
           const data = await resp.json().catch(() => ({}));
-          if (data && (data.success === true || data.status === "ok")) {
+          // Server contract: { success: boolean, error?: string }
+          if (data && data.success === true) {
             showSuccess(email);
+          } else if (data && data.error === "duplicate_email") {
+            // Treat as soft-success: already on the list
+            showSuccess(email);
+          } else if (data && data.error === "captcha_failed") {
+            showError("Captcha verification failed. Please try again.");
+          } else if (data && typeof data.error === "string") {
+            showError(data.error);
           } else {
-            // Accept success if endpoint returns 200 without JSON contract
-            showSuccess(email);
+            showError(
+              "There was a problem submitting your preregistration. Please try again later."
+            );
           }
         } catch (err) {
           console.error(err);
@@ -447,8 +481,14 @@
           );
         } finally {
           setSubmitting(false);
+          try {
+            if (typeof grecaptcha !== "undefined" && grecaptcha)
+              grecaptcha.reset();
+          } catch (_) {}
         }
       });
     </script>
+    <!-- reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </body>
 </html>
