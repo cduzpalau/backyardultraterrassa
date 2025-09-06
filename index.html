@@ -22,6 +22,18 @@
         margin: 0;
         padding: 20px;
       }
+      .lang-switcher {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+      }
+      .lang-switcher select {
+        background: #1e1e1e;
+        color: #fff;
+        border: 1px solid #333;
+        border-radius: 6px;
+        padding: 6px 8px;
+      }
 
       h1 {
         font-size: 2.5rem;
@@ -213,6 +225,13 @@
     </style>
   </head>
   <body>
+    <div class="lang-switcher" aria-label="Language">
+      <select id="lang-select" aria-label="Language selector">
+        <option value="ca">Català</option>
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+    </div>
     <div class="logo-container">
       <a
         href="https://www.instagram.com/backyardultraterrassa/"
@@ -221,9 +240,9 @@
         <img src="logodarkmode.png" alt="Backyard Ultra Terrassa Logo" />
       </a>
     </div>
-    <h1>🏃‍♂️ Backyard Ultra Terrassa 🏃‍♀️</h1>
-    <p id="status-text">🚧 Work in Progress... Stay tuned! 🚧</p>
-    <p id="std-text">Save the date 📅 - 14 March 2026</p>
+    <h1 id="page-title">🏃‍♂️ Backyard Ultra Terrassa 🏃‍♀️</h1>
+    <p id="status-text"></p>
+    <p id="std-text"></p>
 
     <div
       id="prereg-card"
@@ -238,23 +257,15 @@
         <h2 id="prereg-title">Preregister for BYUT 2026</h2>
         <span class="info-icon" tabindex="0" aria-label="Info">
           i
-          <span class="tooltip" role="tooltip">
-            Preregistration does not guarantee entry. Everyone who preregisters
-            will receive a personal email invitation to register before general
-            registration opens. Personal data is kept only for preregistration
-            and email reminders, and will be deleted when official registration
-            opens after reminder emails are sent.
-          </span>
+          <span class="tooltip" id="tooltip-text" role="tooltip"></span>
         </span>
       </div>
-      <p class="subtle">
-        Please complete all fields and accept the data policy.
-      </p>
+      <p id="form-subtle" class="subtle"></p>
 
       <form id="prereg-form" novalidate>
         <div class="row">
           <div class="field">
-            <label for="firstName">Name</label>
+            <label for="firstName" id="label-firstName">Name</label>
             <input
               id="firstName"
               name="firstName"
@@ -264,7 +275,7 @@
             />
           </div>
           <div class="field">
-            <label for="lastName">Last Name</label>
+            <label for="lastName" id="label-lastName">Last Name</label>
             <input
               id="lastName"
               name="lastName"
@@ -275,7 +286,7 @@
           </div>
         </div>
         <div class="field">
-          <label for="email">Email</label>
+          <label for="email" id="label-email">Email</label>
           <input
             id="email"
             name="email"
@@ -288,12 +299,7 @@
 
         <div class="checkbox">
           <input id="consent" name="consent" type="checkbox" required />
-          <label for="consent">
-            I grant permission to store my personal data in accordance with
-            applicable laws in Spain, solely for preregistration and reminder
-            purposes. Data will be deleted when official registration opens
-            after reminder emails are sent.
-          </label>
+          <label id="label-consent" for="consent"></label>
         </div>
 
         <div
@@ -304,9 +310,9 @@
           style="display: none"
         ></div>
 
-        <!-- reCAPTCHA: replace with your site key -->
+        <!-- reCAPTCHA -->
         <div class="field">
-          <label for="captcha">Verification</label>
+          <label for="captcha" id="label-captcha">Verification</label>
           <div
             class="g-recaptcha"
             data-sitekey="6Lcm9L8rAAAAAEF5QyxE568jiw-XeEGT4VnvFsib"
@@ -322,31 +328,207 @@
     </div>
 
     <div id="prereg-success" class="card" style="display: none">
-      <h2>You're on the list 🎉</h2>
-      <p class="success">
+      <h2 id="success-title">You're on the list 🎉</h2>
+      <p id="success-message" class="success">
         Thank you for preregistering. We’ll email you a personal invitation
         before general registration opens.
       </p>
+      <div id="success-summary" class="subtle" aria-live="polite"></div>
+      <div class="actions" style="margin-top: 12px">
+        <button id="register-another-btn" type="button">
+          Pre-register someone else
+        </button>
+      </div>
     </div>
 
     <script>
-      const texts = [
-        "🚧 En procés... Estigueu atents! 🚧",
-        "🚧 En progreso... ¡Estad atentos! 🚧",
-        "🚧 Work in Progress... Stay tuned! 🚧",
-      ];
-      const texts2 = [
-        "Guarda't la data 📅 - 14 Març 2026",
-        "Guardate la fecha 📅 - 14 Marzo 2026",
-        "Save the date 📅 - 14 March 2026",
-      ];
-      let index = 0;
-      function changeLanguage() {
-        index = (index + 1) % texts.length;
-        document.getElementById("status-text").innerText = texts[index];
-        document.getElementById("std-text").innerText = texts2[index];
+      // ===== i18n support =====
+      const I18N_KEY = "byut_lang";
+      const i18n = {
+        ca: {
+          wip: "🚧 En procés... Estigueu atents! 🚧",
+          saveDate: "Guarda't la data 📅 - 14 Març 2026",
+          form: {
+            title: "Preinscripció BYUT 2026",
+            subtle: "Completeu tots els camps i accepteu la política de dades.",
+          },
+          labels: {
+            firstName: "Nom",
+            lastName: "Cognoms",
+            email: "Correu electrònic",
+            captcha: "Verificació",
+          },
+          tooltip: {
+            text: "La preinscripció no garanteix plaça. Tothom qui es preinscrigui rebrà un correu amb invitació personal per inscriure’s abans que s’obri la inscripció general. Les dades personals s’utilitzen només per a la preinscripció i recordatoris, i s’eliminaran quan s’obri la inscripció oficial després d’enviar els recordatoris.",
+          },
+          consent: {
+            label:
+              "Autoritzo l’emmagatzematge de les meves dades personals d’acord amb la legislació vigent a Espanya, només per a la preinscripció i recordatoris. Les dades s’eliminaran quan s’obri la inscripció oficial després d’enviar els recordatoris.",
+          },
+          actions: {
+            submit: "Preinscriure",
+            registerAnother: "Preinscriure una altra persona",
+          },
+          status: { submitting: "Enviant…" },
+          success: {
+            title: "Ja formes part de la llista 🎉",
+            message:
+              "Gràcies per la preinscripció. T’enviarem una invitació personal abans que s’obri la inscripció general.",
+            duplicateTitle: "Ja estàs preinscrit ✅",
+            duplicateMessage:
+              "Aquest correu ja és a la nostra llista de preinscripcions.",
+          },
+          summary: { label: "Resum:" },
+          errors: {
+            completeAllFields: "Completeu tots els camps.",
+            invalidEmail: "Introduïu un correu electrònic vàlid.",
+            mustGrantPermission: "Heu d’acceptar la política de dades.",
+            endpointMissing: "El punt d’enviament no està configurat.",
+            captchaRequired: "Completeu el CAPTCHA.",
+            captchaFailed:
+              "La verificació de CAPTCHA ha fallat. Torneu-ho a provar.",
+            genericSubmitProblem:
+              "Hi ha hagut un problema amb l’enviament. Torneu-ho a provar més tard.",
+          },
+        },
+        es: {
+          wip: "🚧 En progreso... ¡Estad atentos! 🚧",
+          saveDate: "Guardate la fecha 📅 - 14 Marzo 2026",
+          form: {
+            title: "Preinscripción BYUT 2026",
+            subtle: "Completa todos los campos y acepta la política de datos.",
+          },
+          labels: {
+            firstName: "Nombre",
+            lastName: "Apellidos",
+            email: "Correo electrónico",
+            captcha: "Verificación",
+          },
+          tooltip: {
+            text: "La preinscripción no garantiza plaza. Quienes se preinscriban recibirán un correo con invitación personal para inscribirse antes de la apertura general. Los datos personales se usan solo para la preinscripción y recordatorios, y se eliminarán cuando se abra la inscripción oficial tras enviar los recordatorios.",
+          },
+          consent: {
+            label:
+              "Autorizo el almacenamiento de mis datos personales conforme a la legislación vigente en España, únicamente para preinscripción y recordatorios. Los datos se eliminarán cuando se abra la inscripción oficial tras enviar los recordatorios.",
+          },
+          actions: {
+            submit: "Preinscribirse",
+            registerAnother: "Preinscribir a otra persona",
+          },
+          status: { submitting: "Enviando…" },
+          success: {
+            title: "Estás en la lista 🎉",
+            message:
+              "Gracias por preinscribirte. Te enviaremos una invitación personal antes de la apertura general.",
+            duplicateTitle: "Ya está preinscrito ✅",
+            duplicateMessage:
+              "Este correo ya figura en nuestra lista de preinscripción.",
+          },
+          summary: { label: "Resumen:" },
+          errors: {
+            completeAllFields: "Completa todos los campos.",
+            invalidEmail: "Introduce un correo electrónico válido.",
+            mustGrantPermission: "Debes aceptar la política de datos.",
+            endpointMissing: "El endpoint no está configurado.",
+            captchaRequired: "Completa el CAPTCHA.",
+            captchaFailed:
+              "La verificación de CAPTCHA falló. Inténtalo de nuevo.",
+            genericSubmitProblem:
+              "Hubo un problema con el envío. Inténtalo más tarde.",
+          },
+        },
+        en: {
+          wip: "🚧 Work in Progress... Stay tuned! 🚧",
+          saveDate: "Save the date 📅 - 14 March 2026",
+          form: {
+            title: "Preregister for BYUT 2026",
+            subtle: "Please complete all fields and accept the data policy.",
+          },
+          labels: {
+            firstName: "Name",
+            lastName: "Last Name",
+            email: "Email",
+            captcha: "Verification",
+          },
+          tooltip: {
+            text: "Preregistration does not guarantee entry. Everyone who preregisters will receive a personal email invitation to register before general registration opens. Personal data is used only for preregistration and reminders, and will be deleted when official registration opens after reminder emails are sent.",
+          },
+          consent: {
+            label:
+              "I grant permission to store my personal data in accordance with applicable laws in Spain, solely for preregistration and reminder purposes. Data will be deleted when official registration opens after reminder emails are sent.",
+          },
+          actions: {
+            submit: "Preregister",
+            registerAnother: "Pre-register someone else",
+          },
+          status: { submitting: "Submitting…" },
+          success: {
+            title: "You're on the list 🎉",
+            message:
+              "Thank you for preregistering. We’ll email you a personal invitation before general registration opens.",
+            duplicateTitle: "Already preregistered ✅",
+            duplicateMessage:
+              "This email is already on our preregistration list.",
+          },
+          summary: { label: "Summary:" },
+          errors: {
+            completeAllFields: "Please complete all fields.",
+            invalidEmail: "Please enter a valid email address.",
+            mustGrantPermission:
+              "You must grant permission to store your data.",
+            endpointMissing: "Submission endpoint is not configured yet.",
+            captchaRequired: "Please complete the CAPTCHA.",
+            captchaFailed: "Captcha verification failed. Please try again.",
+            genericSubmitProblem:
+              "There was a problem submitting your preregistration. Please try again later.",
+          },
+        },
+      };
+
+      const langSelect = document.getElementById("lang-select");
+      let currentLang = localStorage.getItem(I18N_KEY) || "ca";
+      langSelect.value = currentLang;
+
+      function t(path) {
+        const parts = path.split(".");
+        let obj = i18n[currentLang] || i18n.ca;
+        for (const p of parts) {
+          obj = obj?.[p];
+          if (obj === undefined) return path;
+        }
+        return obj;
       }
-      setInterval(changeLanguage, 5000);
+
+      function applyI18n() {
+        document.getElementById("status-text").textContent = t("wip");
+        document.getElementById("std-text").textContent = t("saveDate");
+        document.getElementById("prereg-title").textContent = t("form.title");
+        document.getElementById("form-subtle").textContent = t("form.subtle");
+        document.getElementById("label-firstName").textContent =
+          t("labels.firstName");
+        document.getElementById("label-lastName").textContent =
+          t("labels.lastName");
+        document.getElementById("label-email").textContent = t("labels.email");
+        document.getElementById("label-captcha").textContent =
+          t("labels.captcha");
+        document.getElementById("label-consent").textContent =
+          t("consent.label");
+        document.getElementById("submit-btn").textContent = t("actions.submit");
+        document.getElementById("register-another-btn").textContent = t(
+          "actions.registerAnother"
+        );
+        document.getElementById("tooltip-text").textContent = t("tooltip.text");
+      }
+
+      langSelect.addEventListener("change", () => {
+        currentLang = langSelect.value;
+        try {
+          localStorage.setItem(I18N_KEY, currentLang);
+        } catch (_) {}
+        applyI18n();
+      });
+
+      applyI18n();
 
       // ===== Preregistration form logic =====
       // Replace this with your deployed Google Apps Script Web App URL.
@@ -360,8 +542,12 @@
       const statusText = document.getElementById("submit-status");
       const successCard = document.getElementById("prereg-success");
       const preregCard = document.getElementById("prereg-card");
-
-      const STORAGE_KEY = "byut_preregistered_email";
+      const successTitle = document.getElementById("success-title");
+      const successMessage = document.getElementById("success-message");
+      const successSummary = document.getElementById("success-summary");
+      const registerAnotherBtn = document.getElementById(
+        "register-another-btn"
+      );
 
       function showError(msg) {
         if (!errorBox) return;
@@ -381,25 +567,26 @@
       function setSubmitting(submitting) {
         if (submitBtn) submitBtn.disabled = submitting;
         if (statusText)
-          statusText.textContent = submitting ? "Submitting…" : "";
+          statusText.textContent = submitting ? t("status.submitting") : "";
       }
-      function showSuccess(email) {
+      function showSuccess({ firstName, lastName, email, duplicate = false }) {
         if (preregCard) preregCard.style.display = "none";
         if (successCard) successCard.style.display = "block";
-        if (email) {
-          try {
-            localStorage.setItem(STORAGE_KEY, String(email));
-          } catch (_) {}
+        if (successTitle)
+          successTitle.textContent = duplicate
+            ? t("success.duplicateTitle")
+            : t("success.title");
+        if (successMessage)
+          successMessage.textContent = duplicate
+            ? t("success.duplicateMessage")
+            : t("success.message");
+        if (successSummary) {
+          const parts = [firstName, lastName, email].filter(Boolean);
+          successSummary.textContent = `${t("summary.label")} ${parts.join(
+            " · "
+          )}`;
         }
       }
-
-      // If already preregistered on this browser, show success
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          showSuccess(saved);
-        }
-      } catch (_) {}
 
       form?.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -413,19 +600,19 @@
         const consent = Boolean(document.getElementById("consent")?.checked);
 
         if (!firstName || !lastName || !email) {
-          showError("Please complete all fields.");
+          showError(t("errors.completeAllFields"));
           return;
         }
         if (!isValidEmail(email)) {
-          showError("Please enter a valid email address.");
+          showError(t("errors.invalidEmail"));
           return;
         }
         if (!consent) {
-          showError("You must grant permission to store your data.");
+          showError(t("errors.mustGrantPermission"));
           return;
         }
         if (!GOOGLE_APPS_SCRIPT_URL) {
-          showError("Submission endpoint is not configured yet.");
+          showError(t("errors.endpointMissing"));
           return;
         }
 
@@ -438,7 +625,7 @@
               ? grecaptcha.getResponse()
               : "";
           if (!captchaToken) {
-            showError("Please complete the CAPTCHA.");
+            showError(t("errors.captchaRequired"));
             return;
           }
 
@@ -461,24 +648,20 @@
           const data = await resp.json().catch(() => ({}));
           // Server contract: { success: boolean, error?: string }
           if (data && data.success === true) {
-            showSuccess(email);
+            showSuccess({ firstName, lastName, email, duplicate: false });
           } else if (data && data.error === "duplicate_email") {
             // Treat as soft-success: already on the list
-            showSuccess(email);
+            showSuccess({ firstName, lastName, email, duplicate: true });
           } else if (data && data.error === "captcha_failed") {
-            showError("Captcha verification failed. Please try again.");
+            showError(t("errors.captchaFailed"));
           } else if (data && typeof data.error === "string") {
             showError(data.error);
           } else {
-            showError(
-              "There was a problem submitting your preregistration. Please try again later."
-            );
+            showError(t("errors.genericSubmitProblem"));
           }
         } catch (err) {
           console.error(err);
-          showError(
-            "There was a problem submitting your preregistration. Please try again later."
-          );
+          showError(t("errors.genericSubmitProblem"));
         } finally {
           setSubmitting(false);
           try {
@@ -487,8 +670,28 @@
           } catch (_) {}
         }
       });
+
+      // Allow multiple preregistrations: reset form and show again
+      registerAnotherBtn?.addEventListener("click", () => {
+        try {
+          form?.reset();
+        } catch (_) {}
+        clearError();
+        if (statusText) statusText.textContent = "";
+        if (successCard) successCard.style.display = "none";
+        if (preregCard) preregCard.style.display = "block";
+        try {
+          if (typeof grecaptcha !== "undefined" && grecaptcha)
+            grecaptcha.reset();
+        } catch (_) {}
+        document.getElementById("firstName")?.focus();
+      });
     </script>
-    <!-- reCAPTCHA API -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- reCAPTCHA API (Catalan by default) -->
+    <script
+      src="https://www.google.com/recaptcha/api.js?hl=ca"
+      async
+      defer
+    ></script>
   </body>
 </html>
