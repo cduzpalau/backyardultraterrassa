@@ -69,19 +69,24 @@
         z-index: 500;
         width: 100%;
         display: flex;
+        align-items: center;
         justify-content: center;
-        gap: 16px;
+        gap: 12px;
+        flex-wrap: wrap;
         background: rgba(18, 18, 18, 0.9);
         backdrop-filter: blur(6px);
         border-bottom: 1px solid #2a2a2a;
         padding: 10px 12px;
+        transition: transform 0.2s ease;
       }
+      .nav.nav--hidden { transform: translateY(-100%); }
       .nav a {
         color: #ddd;
         text-decoration: none;
         font-size: 0.95rem;
         padding: 6px 8px;
         border-radius: 6px;
+        flex: 0 0 auto;
       }
       .nav a:hover {
         color: #fff;
@@ -128,9 +133,28 @@
         object-fit: contain;
         filter: none;
       }
+      /* Tooltip for back-to-top */
+      .to-top[data-tip]::after {
+        content: attr(data-tip);
+        position: absolute;
+        right: 64px;
+        bottom: 8px;
+        background: rgba(0,0,0,0.8);
+        color: #eee;
+        border: 1px solid #333;
+        padding: 6px 8px;
+        border-radius: 6px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateY(6px);
+        pointer-events: none;
+        transition: opacity .15s ease, transform .15s ease;
+      }
+      .to-top:hover::after, .to-top:focus-visible::after { opacity: 1; transform: translateY(0); }
       section {
         width: 100%;
-        scroll-margin-top: 88px; /* account for fixed nav height */
+        scroll-margin-top: 120px; /* account for two-line nav height on mobile */
       }
       .section {
         max-width: 860px;
@@ -160,6 +184,10 @@
           grid-template-columns: 1fr 1fr;
         }
       }
+      @media (max-width: 700px) {
+        .nav { gap: 8px; }
+        .nav a { font-size: 0.9rem; padding: 6px 6px; }
+      }
       .img-card {
         background: #1e1e1e;
         border: 1px solid #2a2a2a;
@@ -173,9 +201,10 @@
         display: block;
       }
       .lang-switcher {
-        position: absolute;
-        top: 12px;
+        position: fixed;
+        top: 70px; /* below fixed nav */
         right: 12px;
+        z-index: 600;
       }
       .lang-switcher select {
         background: #1e1e1e;
@@ -380,7 +409,6 @@
       <a id="nav-home" href="#home" class="active">Home</a>
       <a id="nav-format" href="#format">Format</a>
       <a id="nav-course" href="#course">Course</a>
-      <a id="nav-schedule" href="#schedule">Schedule</a>
       <a id="nav-location" href="#location">Location</a>
       <a id="nav-faq" href="#faq">FAQ</a>
       <a id="nav-preregister" href="#preregister">Preregister</a>
@@ -461,10 +489,7 @@
       </p>
     </section>
 
-    <section id="schedule" class="section">
-      <h2 id="schedule-title">Schedule</h2>
-      <ul id="schedule-list" class="muted" style="padding-left: 18px"></ul>
-    </section>
+    
 
     <section id="location" class="section">
       <h2 id="location-title">Location</h2>
@@ -588,7 +613,8 @@
 
     <script>
       // Highlight active nav item on scroll
-      const navLinks = Array.from(document.querySelectorAll(".nav a"));
+      const nav = document.querySelector('.nav');
+      const navLinks = Array.from(document.querySelectorAll('.nav a'));
       const sections = navLinks
         .map((a) => document.querySelector(a.getAttribute("href")))
         .filter(Boolean);
@@ -608,6 +634,31 @@
         { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 }
       );
       sections.forEach((sec) => observer.observe(sec));
+
+      // Auto-hide smart header on scroll
+      let lastY = window.scrollY;
+      let ticking = false;
+      const hideThreshold = 10;
+      const minY = 150;
+      function onScrollSmart() {
+        const y = window.scrollY;
+        const diff = y - lastY;
+        if (Math.abs(diff) > hideThreshold) {
+          if (diff > 0 && y > minY) {
+            nav.classList.add('nav--hidden');
+          } else {
+            nav.classList.remove('nav--hidden');
+          }
+          lastY = y;
+        }
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(onScrollSmart);
+          ticking = true;
+        }
+      }, { passive: true });
 
       // ===== i18n support =====
       const I18N_KEY = "byut_lang";
@@ -935,7 +986,6 @@
         document.getElementById("nav-home").textContent = t("nav.home");
         document.getElementById("nav-format").textContent = t("nav.format");
         document.getElementById("nav-course").textContent = t("nav.course");
-        document.getElementById("nav-schedule").textContent = t("nav.schedule");
         document.getElementById("nav-location").textContent = t("nav.location");
         document.getElementById("nav-faq").textContent = t("nav.faq");
         document.getElementById("nav-preregister").textContent =
@@ -965,12 +1015,7 @@
         )}: <a href="https://www.strava.com/routes/3400246284944316632" target="_blank" rel="noopener">${t(
           "course.route"
         )}</a>`;
-        // Schedule
-        document.getElementById("schedule-title").textContent =
-          t("schedule.title");
-        const sl = document.getElementById("schedule-list");
-        const items = i18n[currentLang]?.schedule?.items || [];
-        sl.innerHTML = items.map((i) => `<li>${i}</li>`).join("");
+        // Schedule removed
         // Location
         document.getElementById("location-title").textContent =
           t("location.title");
@@ -1184,12 +1229,7 @@
       async
       defer
     ></script>
-    <button
-      id="to-top"
-      class="to-top"
-      aria-label="Back to top"
-      title="Back to top"
-    >
+    <button id="to-top" class="to-top" aria-label="Back to top" title="Back to top" data-tip="Back to top">
       <img src="assets/logodarkmode.png" alt="Backyard Ultra Terrassa" />
     </button>
     <script>
