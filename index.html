@@ -48,7 +48,7 @@
         width: 130vmax;
         height: 130vmax;
         transform: rotate(-18deg);
-        background-image: url("assets/elevationv1.png");
+        background-image: url("assets/Elevationv1.png");
       }
       .bg::after {
         bottom: -25%;
@@ -79,7 +79,9 @@
         padding: 10px 12px;
         transition: transform 0.2s ease;
       }
-      .nav.nav--hidden { transform: translateY(-100%); }
+      .nav.nav--hidden {
+        transform: translateY(-100%);
+      }
       .nav a {
         color: #ddd;
         text-decoration: none;
@@ -139,7 +141,7 @@
         position: absolute;
         right: 64px;
         bottom: 8px;
-        background: rgba(0,0,0,0.8);
+        background: rgba(0, 0, 0, 0.8);
         color: #eee;
         border: 1px solid #333;
         padding: 6px 8px;
@@ -149,9 +151,13 @@
         opacity: 0;
         transform: translateY(6px);
         pointer-events: none;
-        transition: opacity .15s ease, transform .15s ease;
+        transition: opacity 0.15s ease, transform 0.15s ease;
       }
-      .to-top:hover::after, .to-top:focus-visible::after { opacity: 1; transform: translateY(0); }
+      .to-top:hover::after,
+      .to-top:focus-visible::after {
+        opacity: 1;
+        transform: translateY(0);
+      }
       section {
         width: 100%;
         scroll-margin-top: 120px; /* account for two-line nav height on mobile */
@@ -185,8 +191,13 @@
         }
       }
       @media (max-width: 700px) {
-        .nav { gap: 8px; }
-        .nav a { font-size: 0.9rem; padding: 6px 6px; }
+        .nav {
+          gap: 8px;
+        }
+        .nav a {
+          font-size: 0.9rem;
+          padding: 6px 6px;
+        }
       }
       .img-card {
         background: #1e1e1e;
@@ -202,16 +213,30 @@
       }
       .lang-switcher {
         position: fixed;
-        top: 70px; /* below fixed nav */
+        top: 10px;
         right: 12px;
         z-index: 600;
+        display: inline-flex;
+        gap: 6px;
       }
-      .lang-switcher select {
+      .lang-btn {
         background: #1e1e1e;
-        color: #fff;
+        color: #eee;
         border: 1px solid #333;
-        border-radius: 6px;
+        border-radius: 999px;
         padding: 6px 8px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .lang-btn:hover,
+      .lang-btn:focus-visible {
+        background: #242424;
+        outline: none;
+      }
+      .lang-btn.active {
+        background: #4caf50;
+        border-color: #4caf50;
+        color: #fff;
       }
 
       h1 {
@@ -407,18 +432,37 @@
     <div class="bg" aria-hidden="true"></div>
     <header class="nav" role="navigation" aria-label="Primary">
       <a id="nav-home" href="#home" class="active">Home</a>
-      <a id="nav-format" href="#format">Format</a>
+      <a id="nav-format" href="#format">Rules</a>
       <a id="nav-course" href="#course">Course</a>
       <a id="nav-location" href="#location">Location</a>
       <a id="nav-faq" href="#faq">FAQ</a>
       <a id="nav-preregister" href="#preregister">Preregister</a>
     </header>
     <div class="lang-switcher" aria-label="Language">
-      <select id="lang-select" aria-label="Language selector">
-        <option value="ca">Català</option>
-        <option value="es">Español</option>
-        <option value="en">English</option>
-      </select>
+      <button
+        type="button"
+        class="lang-btn"
+        data-lang="ca"
+        aria-label="Catalan"
+      >
+        CA
+      </button>
+      <button
+        type="button"
+        class="lang-btn"
+        data-lang="es"
+        aria-label="Spanish"
+      >
+        ES
+      </button>
+      <button
+        type="button"
+        class="lang-btn"
+        data-lang="en"
+        aria-label="English"
+      >
+        EN
+      </button>
     </div>
     <section id="home" class="section hero">
       <div class="logo-container">
@@ -455,7 +499,7 @@
     </section>
 
     <section id="format" class="section">
-      <h2 id="format-title">Format</h2>
+      <h2 id="format-title">Rules</h2>
       <ul
         id="format-list"
         class="muted"
@@ -474,7 +518,7 @@
           <img src="assets/mapv1.png" alt="Course map" />
         </div>
         <div class="img-card">
-          <img src="assets/elevationv1.png" alt="Course elevation profile" />
+          <img src="assets/Elevationv1.png" alt="Course elevation profile" />
         </div>
       </div>
       <p id="course-links" style="margin-top: 12px">
@@ -488,8 +532,6 @@
         >
       </p>
     </section>
-
-    
 
     <section id="location" class="section">
       <h2 id="location-title">Location</h2>
@@ -613,8 +655,8 @@
 
     <script>
       // Highlight active nav item on scroll
-      const nav = document.querySelector('.nav');
-      const navLinks = Array.from(document.querySelectorAll('.nav a'));
+      const nav = document.querySelector(".nav");
+      const navLinks = Array.from(document.querySelectorAll(".nav a"));
       const sections = navLinks
         .map((a) => document.querySelector(a.getAttribute("href")))
         .filter(Boolean);
@@ -645,20 +687,24 @@
         const diff = y - lastY;
         if (Math.abs(diff) > hideThreshold) {
           if (diff > 0 && y > minY) {
-            nav.classList.add('nav--hidden');
+            nav.classList.add("nav--hidden");
           } else {
-            nav.classList.remove('nav--hidden');
+            nav.classList.remove("nav--hidden");
           }
           lastY = y;
         }
         ticking = false;
       }
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          window.requestAnimationFrame(onScrollSmart);
-          ticking = true;
-        }
-      }, { passive: true });
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!ticking) {
+            window.requestAnimationFrame(onScrollSmart);
+            ticking = true;
+          }
+        },
+        { passive: true }
+      );
 
       // ===== i18n support =====
       const I18N_KEY = "byut_lang";
@@ -668,7 +714,7 @@
           saveDate: "Guarda't la data 📅 - 14 Març 2026",
           nav: {
             home: "Inici",
-            format: "Format",
+            format: "Reglament",
             course: "Circuit",
             schedule: "Horaris",
             location: "Ubicació",
@@ -682,7 +728,7 @@
             linkText: "Fitxa de l’esdeveniment",
           },
           format: {
-            title: "Format",
+            title: "Reglament",
             points: [
               "Cada hora en punt ⏰ comences una volta de 6,7 km.",
               "Tens 60:00 per acabar. Si arribes d’hora, descansa; si arribes tard, DNF.",
@@ -692,7 +738,7 @@
               "Guanya l’últim/a en resistir 🏆; la resta són DNF (per definició!).",
               "L’estratègia importa: menja, hidrata’t, canvia capes, carrega llums 🔋 — repeteix.",
               "Circuit marcat; porta llum per a la nit 🌙 i un somriure a l’alba 🌅.",
-              "Ou de Pasqua: no pots fer més voltes que l’Oriol Antolí 😉 (102 voltes — rècord d’Espanya i coorganitzador).",
+              "No pots fer més voltes que l’Oriol Antolí 😉 (102 voltes — rècord d’Espanya i coorganitzador).",
             ],
           },
           course: {
@@ -768,7 +814,7 @@
           saveDate: "Guardate la fecha 📅 - 14 Marzo 2026",
           nav: {
             home: "Inicio",
-            format: "Formato",
+            format: "Reglamento",
             course: "Circuito",
             schedule: "Horarios",
             location: "Ubicación",
@@ -782,7 +828,7 @@
             linkText: "Ficha del evento",
           },
           format: {
-            title: "Formato",
+            title: "Reglamento",
             points: [
               "Cada hora en punto ⏰ empiezas una vuelta de 6,7 km.",
               "Tienes 60:00 para terminar. ¿Llegas antes? Descansa; ¿tarde? DNF.",
@@ -792,7 +838,7 @@
               "Gana el Último en Pie 🏆; el resto son DNF (¡por diseño!).",
               "La estrategia cuenta: comer, beber, cambiar capas, cargar luces 🔋 — repetir.",
               "Circuito marcado; trae luz para la noche 🌙 y una sonrisa para el amanecer 🌅.",
-              "Huevo de Pascua: no puedes hacer más vueltas que Oriol Antolí 😉 (102 vueltas — récord de España y coorganizador).",
+              "No puedes hacer más vueltas que Oriol Antolí 😉 (102 vueltas — récord de España y coorganizador).",
             ],
           },
           course: {
@@ -868,7 +914,7 @@
           saveDate: "Save the date 📅 - 14 March 2026",
           nav: {
             home: "Home",
-            format: "Format",
+            format: "Rules",
             course: "Course",
             schedule: "Schedule",
             location: "Location",
@@ -882,7 +928,7 @@
             linkText: "Event listing",
           },
           format: {
-            title: "Format",
+            title: "Rules",
             points: [
               "Every hour on the hour ⏰ you start a 6.7 km loop.",
               "You’ve got 60:00 to finish. Arrive early? Rest. Arrive late? DNF.",
@@ -892,7 +938,7 @@
               "Last One Standing wins 🏆; everyone else is officially a DNF (by design!).",
               "Strategy matters: eat, drink, change layers, charge lights 🔋 — repeat.",
               "Course is marked; bring lights for night laps 🌙 and a smile for sunrise 🌅.",
-              "Easter egg: You can’t do more loops than Oriol Antolí 😉 (102-loop Spanish record and BYUT co-organizer!).",
+              "You can’t do more loops than Oriol Antolí 😉 (102-loop Spanish record and BYUT co-organizer!).",
             ],
           },
           course: {
@@ -965,9 +1011,8 @@
         },
       };
 
-      const langSelect = document.getElementById("lang-select");
+      const langBtns = Array.from(document.querySelectorAll(".lang-btn"));
       let currentLang = localStorage.getItem(I18N_KEY) || "ca";
-      langSelect.value = currentLang;
 
       function t(path) {
         const parts = path.split(".");
@@ -1047,14 +1092,26 @@
         document.getElementById("tooltip-text").textContent = t("tooltip.text");
       }
 
-      langSelect.addEventListener("change", () => {
-        currentLang = langSelect.value;
-        try {
-          localStorage.setItem(I18N_KEY, currentLang);
-        } catch (_) {}
-        applyI18n();
+      function updateLangButtons() {
+        langBtns.forEach((btn) =>
+          btn.classList.toggle("active", btn.dataset.lang === currentLang)
+        );
+      }
+
+      langBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const lang = btn.dataset.lang;
+          if (!lang || lang === currentLang) return;
+          currentLang = lang;
+          try {
+            localStorage.setItem(I18N_KEY, currentLang);
+          } catch (_) {}
+          updateLangButtons();
+          applyI18n();
+        });
       });
 
+      updateLangButtons();
       applyI18n();
 
       // ===== Preregistration form logic =====
@@ -1229,7 +1286,13 @@
       async
       defer
     ></script>
-    <button id="to-top" class="to-top" aria-label="Back to top" title="Back to top" data-tip="Back to top">
+    <button
+      id="to-top"
+      class="to-top"
+      aria-label="Back to top"
+      title="Back to top"
+      data-tip="Back to top"
+    >
       <img src="assets/logodarkmode.png" alt="Backyard Ultra Terrassa" />
     </button>
     <script>
