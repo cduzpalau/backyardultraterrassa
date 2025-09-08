@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backyard Ultra Terrassa</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #121212;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+      .lang-switcher {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+      }
+      .lang-switcher select {
+        background: #1e1e1e;
+        color: #fff;
+        border: 1px solid #333;
+        border-radius: 6px;
+        padding: 6px 8px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1.25rem;
+        margin: 10px 0;
+      }
+
+      .emoji-art {
+        font-size: 2rem;
+        margin-top: 20px;
+      }
+
+      .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        width: 100%;
+        max-width: 600px;
+      }
+
+      .logo-container img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
+
+        .emoji-art {
+          font-size: 1.5rem;
+        }
+
+        .logo-container img {
+          max-width: 80%;
+        }
+      }
+
+      /* Preregistration form styles */
+      .card {
+        background: #1e1e1e;
+        border: 1px solid #2a2a2a;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 24px;
+        width: 100%;
+        max-width: 560px;
+        text-align: left;
+      }
+      .card h2 {
+        margin: 0 0 8px 0;
+        font-size: 1.4rem;
+      }
+      .subtle {
+        color: #cfcfcf;
+        font-size: 0.95rem;
+        margin: 0 0 12px 0;
+      }
+      .row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .field {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-width: 200px;
+        margin-bottom: 12px;
+      }
+      label {
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+      }
+      input[type="text"],
+      input[type="email"] {
+        background: #121212;
+        color: #fff;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 10px 12px;
+        font-size: 1rem;
+        outline: none;
+      }
+      input[type="text"]:focus,
+      input[type="email"]:focus {
+        border-color: #555;
+      }
+      .checkbox {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin: 8px 0 12px 0;
+      }
+      .checkbox input {
+        margin-top: 3px;
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      button[type="submit"] {
+        background: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 16px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      button[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .error {
+        color: #ff6b6b;
+        font-size: 0.95rem;
+      }
+      .success {
+        color: #7cd992;
+        font-size: 1rem;
+      }
+      /* Tooltip */
+      .info {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .info-icon {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 1px solid #aaa;
+        color: #ddd;
+        font-weight: 700;
+        font-size: 0.85rem;
+        line-height: 16px;
+        text-align: center;
+        cursor: default;
+        position: relative;
+      }
+      .tooltip {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #222;
+        color: #eee;
+        border: 1px solid #333;
+        padding: 10px 12px;
+        border-radius: 8px;
+        width: 280px;
+        font-size: 0.9rem;
+        line-height: 1.3;
+        transition: opacity 0.15s ease-in-out;
+        z-index: 10;
+        text-align: left;
+      }
+      .tooltip::after {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid #333;
+      }
+      .info-icon:hover .tooltip,
+      .info-icon:focus .tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lang-switcher" aria-label="Language">
+      <select id="lang-select" aria-label="Language selector">
+        <option value="ca">Català</option>
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+    <div class="logo-container">
+      <a
+        href="https://www.instagram.com/backyardultraterrassa/"
+        target="_blank"
+      >
+        <img src="logodarkmode.png" alt="Backyard Ultra Terrassa Logo" />
+      </a>
+    </div>
+    <h1 id="page-title">🏃‍♂️ Backyard Ultra Terrassa 🏃‍♀️</h1>
+    <p id="status-text"></p>
+    <p id="std-text"></p>
+
+    <div
+      id="prereg-card"
+      class="card"
+      role="region"
+      aria-labelledby="prereg-title"
+    >
+      <div
+        class="info"
+        style="justify-content: space-between; align-items: start"
+      >
+        <h2 id="prereg-title">Preregister for BYUT 2026</h2>
+        <span class="info-icon" tabindex="0" aria-label="Info">
+          i
+          <span class="tooltip" id="tooltip-text" role="tooltip"></span>
+        </span>
+      </div>
+      <p id="form-subtle" class="subtle"></p>
+
+      <form id="prereg-form" novalidate>
+        <div class="row">
+          <div class="field">
+            <label for="firstName" id="label-firstName">Name</label>
+            <input
+              id="firstName"
+              name="firstName"
+              type="text"
+              autocomplete="given-name"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="lastName" id="label-lastName">Last Name</label>
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              autocomplete="family-name"
+              required
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label for="email" id="label-email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="checkbox">
+          <input id="consent" name="consent" type="checkbox" required />
+          <label id="label-consent" for="consent"></label>
+        </div>
+
+        <div
+          id="form-error"
+          class="error"
+          role="alert"
+          aria-live="polite"
+          style="display: none"
+        ></div>
+
+        <!-- reCAPTCHA -->
+        <div class="field">
+          <label for="captcha" id="label-captcha">Verification</label>
+          <div
+            class="g-recaptcha"
+            data-sitekey="6Lcm9L8rAAAAAEF5QyxE568jiw-XeEGT4VnvFsib"
+            data-theme="dark"
+          ></div>
+        </div>
+
+        <div class="actions">
+          <button id="submit-btn" type="submit">Preregister</button>
+          <span id="submit-status" class="subtle" aria-live="polite"></span>
+        </div>
+      </form>
+    </div>
+
+    <div id="prereg-success" class="card" style="display: none">
+      <h2 id="success-title">You're on the list 🎉</h2>
+      <p id="success-message" class="success">
+        Thank you for preregistering. We’ll email you a personal invitation
+        before general registration opens.
+      </p>
+      <div id="success-summary" class="subtle" aria-live="polite"></div>
+      <div class="actions" style="margin-top: 12px">
+        <button id="register-another-btn" type="button">
+          Pre-register someone else
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // ===== i18n support =====
+      const I18N_KEY = "byut_lang";
+      const i18n = {
+        ca: {
+          wip: "🚧 En procés... Estigueu atents! 🚧",
+          saveDate: "Guarda't la data 📅 - 14 Març 2026",
+          form: {
+            title: "Preinscripció BYUT 2026",
+            subtle: "Completeu tots els camps i accepteu la política de dades.",
+          },
+          labels: {
+            firstName: "Nom",
+            lastName: "Cognoms",
+            email: "Correu electrònic",
+            captcha: "Verificació",
+          },
+          tooltip: {
+            text: "La preinscripció no garanteix plaça. Tothom qui es preinscrigui rebrà un correu amb invitació personal per inscriure’s abans que s’obri la inscripció general. Les dades personals s’utilitzen només per a la preinscripció i recordatoris, i s’eliminaran quan s’obri la inscripció oficial després d’enviar els recordatoris.",
+          },
+          consent: {
+            label:
+              "Autoritzo l’emmagatzematge de les meves dades personals d’acord amb la legislació vigent a Espanya, només per a la preinscripció i recordatoris. Les dades s’eliminaran quan s’obri la inscripció oficial després d’enviar els recordatoris.",
+          },
+          actions: {
+            submit: "Preinscriure",
+            registerAnother: "Preinscriure una altra persona",
+          },
+          status: { submitting: "Enviant…" },
+          success: {
+            title: "Ja formes part de la llista 🎉",
+            message:
+              "Gràcies per la preinscripció. T’enviarem una invitació personal abans que s’obri la inscripció general.",
+            duplicateTitle: "Ja estàs preinscrit ✅",
+            duplicateMessage:
+              "Aquest correu ja és a la nostra llista de preinscripcions.",
+          },
+          summary: { label: "Resum:" },
+          errors: {
+            completeAllFields: "Completeu tots els camps.",
+            invalidEmail: "Introduïu un correu electrònic vàlid.",
+            mustGrantPermission: "Heu d’acceptar la política de dades.",
+            endpointMissing: "El punt d’enviament no està configurat.",
+            captchaRequired: "Completeu el CAPTCHA.",
+            captchaFailed:
+              "La verificació de CAPTCHA ha fallat. Torneu-ho a provar.",
+            genericSubmitProblem:
+              "Hi ha hagut un problema amb l’enviament. Torneu-ho a provar més tard.",
+          },
+        },
+        es: {
+          wip: "🚧 En progreso... ¡Estad atentos! 🚧",
+          saveDate: "Guardate la fecha 📅 - 14 Marzo 2026",
+          form: {
+            title: "Preinscripción BYUT 2026",
+            subtle: "Completa todos los campos y acepta la política de datos.",
+          },
+          labels: {
+            firstName: "Nombre",
+            lastName: "Apellidos",
+            email: "Correo electrónico",
+            captcha: "Verificación",
+          },
+          tooltip: {
+            text: "La preinscripción no garantiza plaza. Quienes se preinscriban recibirán un correo con invitación personal para inscribirse antes de la apertura general. Los datos personales se usan solo para la preinscripción y recordatorios, y se eliminarán cuando se abra la inscripción oficial tras enviar los recordatorios.",
+          },
+          consent: {
+            label:
+              "Autorizo el almacenamiento de mis datos personales conforme a la legislación vigente en España, únicamente para preinscripción y recordatorios. Los datos se eliminarán cuando se abra la inscripción oficial tras enviar los recordatorios.",
+          },
+          actions: {
+            submit: "Preinscribirse",
+            registerAnother: "Preinscribir a otra persona",
+          },
+          status: { submitting: "Enviando…" },
+          success: {
+            title: "Estás en la lista 🎉",
+            message:
+              "Gracias por preinscribirte. Te enviaremos una invitación personal antes de la apertura general.",
+            duplicateTitle: "Ya está preinscrito ✅",
+            duplicateMessage:
+              "Este correo ya figura en nuestra lista de preinscripción.",
+          },
+          summary: { label: "Resumen:" },
+          errors: {
+            completeAllFields: "Completa todos los campos.",
+            invalidEmail: "Introduce un correo electrónico válido.",
+            mustGrantPermission: "Debes aceptar la política de datos.",
+            endpointMissing: "El endpoint no está configurado.",
+            captchaRequired: "Completa el CAPTCHA.",
+            captchaFailed:
+              "La verificación de CAPTCHA falló. Inténtalo de nuevo.",
+            genericSubmitProblem:
+              "Hubo un problema con el envío. Inténtalo más tarde.",
+          },
+        },
+        en: {
+          wip: "🚧 Work in Progress... Stay tuned! 🚧",
+          saveDate: "Save the date 📅 - 14 March 2026",
+          form: {
+            title: "Preregister for BYUT 2026",
+            subtle: "Please complete all fields and accept the data policy.",
+          },
+          labels: {
+            firstName: "Name",
+            lastName: "Last Name",
+            email: "Email",
+            captcha: "Verification",
+          },
+          tooltip: {
+            text: "Preregistration does not guarantee entry. Everyone who preregisters will receive a personal email invitation to register before general registration opens. Personal data is used only for preregistration and reminders, and will be deleted when official registration opens after reminder emails are sent.",
+          },
+          consent: {
+            label:
+              "I grant permission to store my personal data in accordance with applicable laws in Spain, solely for preregistration and reminder purposes. Data will be deleted when official registration opens after reminder emails are sent.",
+          },
+          actions: {
+            submit: "Preregister",
+            registerAnother: "Pre-register someone else",
+          },
+          status: { submitting: "Submitting…" },
+          success: {
+            title: "You're on the list 🎉",
+            message:
+              "Thank you for preregistering. We’ll email you a personal invitation before general registration opens.",
+            duplicateTitle: "Already preregistered ✅",
+            duplicateMessage:
+              "This email is already on our preregistration list.",
+          },
+          summary: { label: "Summary:" },
+          errors: {
+            completeAllFields: "Please complete all fields.",
+            invalidEmail: "Please enter a valid email address.",
+            mustGrantPermission:
+              "You must grant permission to store your data.",
+            endpointMissing: "Submission endpoint is not configured yet.",
+            captchaRequired: "Please complete the CAPTCHA.",
+            captchaFailed: "Captcha verification failed. Please try again.",
+            genericSubmitProblem:
+              "There was a problem submitting your preregistration. Please try again later.",
+          },
+        },
+      };
+
+      const langSelect = document.getElementById("lang-select");
+      let currentLang = localStorage.getItem(I18N_KEY) || "ca";
+      langSelect.value = currentLang;
+
+      function t(path) {
+        const parts = path.split(".");
+        let obj = i18n[currentLang] || i18n.ca;
+        for (const p of parts) {
+          obj = obj?.[p];
+          if (obj === undefined) return path;
+        }
+        return obj;
+      }
+
+      function applyI18n() {
+        document.getElementById("status-text").textContent = t("wip");
+        document.getElementById("std-text").textContent = t("saveDate");
+        document.getElementById("prereg-title").textContent = t("form.title");
+        document.getElementById("form-subtle").textContent = t("form.subtle");
+        document.getElementById("label-firstName").textContent =
+          t("labels.firstName");
+        document.getElementById("label-lastName").textContent =
+          t("labels.lastName");
+        document.getElementById("label-email").textContent = t("labels.email");
+        document.getElementById("label-captcha").textContent =
+          t("labels.captcha");
+        document.getElementById("label-consent").textContent =
+          t("consent.label");
+        document.getElementById("submit-btn").textContent = t("actions.submit");
+        document.getElementById("register-another-btn").textContent = t(
+          "actions.registerAnother"
+        );
+        document.getElementById("tooltip-text").textContent = t("tooltip.text");
+      }
+
+      langSelect.addEventListener("change", () => {
+        currentLang = langSelect.value;
+        try {
+          localStorage.setItem(I18N_KEY, currentLang);
+        } catch (_) {}
+        applyI18n();
+      });
+
+      applyI18n();
+
+      // ===== Preregistration form logic =====
+      // Replace this with your deployed Google Apps Script Web App URL.
+      // See the instructions in my message to set it up.
+      const GOOGLE_APPS_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbwfFER8-DY0dJJ-HEn35BiqZ3bURLoXdmIybdluH7NKGpDLct4kkhS1GD6UFMdDH687nQ/exec"; // e.g. https://script.google.com/macros/s/AKfycbx.../exec
+
+      const form = document.getElementById("prereg-form");
+      const submitBtn = document.getElementById("submit-btn");
+      const errorBox = document.getElementById("form-error");
+      const statusText = document.getElementById("submit-status");
+      const successCard = document.getElementById("prereg-success");
+      const preregCard = document.getElementById("prereg-card");
+      const successTitle = document.getElementById("success-title");
+      const successMessage = document.getElementById("success-message");
+      const successSummary = document.getElementById("success-summary");
+      const registerAnotherBtn = document.getElementById(
+        "register-another-btn"
+      );
+
+      function showError(msg) {
+        if (!errorBox) return;
+        errorBox.style.display = "block";
+        errorBox.textContent = msg;
+      }
+      function clearError() {
+        if (!errorBox) return;
+        errorBox.style.display = "none";
+        errorBox.textContent = "";
+      }
+      function isValidEmail(email) {
+        // Simple robust email validation pattern
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        return re.test(String(email).trim());
+      }
+      function setSubmitting(submitting) {
+        if (submitBtn) submitBtn.disabled = submitting;
+        if (statusText)
+          statusText.textContent = submitting ? t("status.submitting") : "";
+      }
+      function showSuccess({ firstName, lastName, email, duplicate = false }) {
+        if (preregCard) preregCard.style.display = "none";
+        if (successCard) successCard.style.display = "block";
+        if (successTitle)
+          successTitle.textContent = duplicate
+            ? t("success.duplicateTitle")
+            : t("success.title");
+        if (successMessage)
+          successMessage.textContent = duplicate
+            ? t("success.duplicateMessage")
+            : t("success.message");
+        if (successSummary) {
+          const parts = [firstName, lastName, email].filter(Boolean);
+          successSummary.textContent = `${t("summary.label")} ${parts.join(
+            " · "
+          )}`;
+        }
+      }
+
+      form?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        clearError();
+
+        const firstName =
+          document.getElementById("firstName")?.value?.trim() || "";
+        const lastName =
+          document.getElementById("lastName")?.value?.trim() || "";
+        const email = document.getElementById("email")?.value?.trim() || "";
+        const consent = Boolean(document.getElementById("consent")?.checked);
+
+        if (!firstName || !lastName || !email) {
+          showError(t("errors.completeAllFields"));
+          return;
+        }
+        if (!isValidEmail(email)) {
+          showError(t("errors.invalidEmail"));
+          return;
+        }
+        if (!consent) {
+          showError(t("errors.mustGrantPermission"));
+          return;
+        }
+        if (!GOOGLE_APPS_SCRIPT_URL) {
+          showError(t("errors.endpointMissing"));
+          return;
+        }
+
+        setSubmitting(true);
+        try {
+          // Send as URL-encoded to keep it a CORS simple request (no preflight)
+          // Captcha token (reCAPTCHA v2 checkbox)
+          const captchaToken =
+            typeof grecaptcha !== "undefined" && grecaptcha
+              ? grecaptcha.getResponse()
+              : "";
+          if (!captchaToken) {
+            showError(t("errors.captchaRequired"));
+            return;
+          }
+
+          const body = new URLSearchParams({
+            firstName,
+            lastName,
+            email,
+            lang: currentLang,
+            captcha: captchaToken,
+          });
+          const resp = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            },
+            body,
+          });
+          if (!resp.ok) {
+            throw new Error(`Request failed: ${resp.status}`);
+          }
+          const data = await resp.json().catch(() => ({}));
+          // Server contract: { success: boolean, error?: string }
+          if (data && data.success === true) {
+            showSuccess({ firstName, lastName, email, duplicate: false });
+          } else if (data && data.error === "duplicate_email") {
+            // Treat as soft-success: already on the list
+            showSuccess({ firstName, lastName, email, duplicate: true });
+          } else if (data && data.error === "captcha_failed") {
+            showError(t("errors.captchaFailed"));
+          } else if (data && typeof data.error === "string") {
+            showError(data.error);
+          } else {
+            showError(t("errors.genericSubmitProblem"));
+          }
+        } catch (err) {
+          console.error(err);
+          showError(t("errors.genericSubmitProblem"));
+        } finally {
+          setSubmitting(false);
+          try {
+            if (typeof grecaptcha !== "undefined" && grecaptcha)
+              grecaptcha.reset();
+          } catch (_) {}
+        }
+      });
+
+      // Allow multiple preregistrations: reset form and show again
+      registerAnotherBtn?.addEventListener("click", () => {
+        try {
+          form?.reset();
+        } catch (_) {}
+        clearError();
+        if (statusText) statusText.textContent = "";
+        if (successCard) successCard.style.display = "none";
+        if (preregCard) preregCard.style.display = "block";
+        try {
+          if (typeof grecaptcha !== "undefined" && grecaptcha)
+            grecaptcha.reset();
+        } catch (_) {}
+        document.getElementById("firstName")?.focus();
+      });
+    </script>
+    <!-- reCAPTCHA API (Catalan by default) -->
+    <script
+      src="https://www.google.com/recaptcha/api.js?hl=ca"
+      async
+      defer
+    ></script>
+  </body>
+</html>
