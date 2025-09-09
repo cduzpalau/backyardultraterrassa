@@ -1,0 +1,288 @@
+{
+  "ca": {
+    "wip": "🚧 En procés... Estigueu atents! 🚧",
+    "saveDate": "Guarda't la data 📅 - 14 Març 2026",
+    "nav": {
+      "home": "Inici",
+      "format": "Reglament",
+      "course": "Circuit",
+      "schedule": "Horaris",
+      "location": "Ubicació",
+      "faq": "FAQ",
+      "preregister": "Preinscripció"
+    },
+    "about": {
+      "title": "Sobre la cursa",
+      "text": "Dissabte 14 de març de 2026 començarà la primera edició de la Backyard Ultra Terrassa. La BYUT neix amb la idea d’aportar solidàriament a la comunitat Backyard. Gràcies al terreny fantàstic de Terrassa, el circuit té un desnivell moderat i zones ombrívoles a prop de la riera de la Betzuca (\"Torrent de la Batzuca\").",
+      "linkPrefix": "Més informació a la pàgina oficial:",
+      "linkText": "Fitxa de l’esdeveniment"
+    },
+    "format": {
+      "title": "Reglament",
+      "points": [
+        "Cada hora en punt ⏰ comences una volta de 6,7 km.",
+        "Tens 60:00 per acabar. Si arribes d’hora, descansa; si arribes tard, DNF.",
+        "Sense “estalvi de temps” 💳 — els minuts sobrants no es guarden.",
+        "Has d’estar al “corral” a l’inici 🔔. No hi ets? DNF.",
+        "Sense pacers ni ajuda externa al circuit. Assistència només al corral 🥤.",
+        "Guanya l’últim/a en resistir 🏆; la resta són DNF (per definició!).",
+        "L’estratègia importa: menja, hidrata’t, canvia capes, carrega llums 🔋 — repeteix.",
+        "Circuit marcat; porta llum per a la nit 🌙 i un somriure a l’alba 🌅.",
+        "No pots fer més voltes que l’Oriol Antolí 😉 (102 voltes — rècord d’Espanya i coorganitzador)."
+      ]
+    },
+    "course": {
+      "title": "Circuit",
+      "distance": "Distància",
+      "elevation": "Desnivell positiu",
+      "downloadGpx": "Descarrega GPX",
+      "viewOnStrava": "Veure a Strava",
+      "route": "Ruta"
+    },
+    "schedule": {
+      "title": "Horaris",
+      "items": [
+        "Recollida de dorsals: Pendent",
+        "Brífing: Pendent",
+        "Inici: 14 Març 2026 — 08:00"
+      ]
+    },
+    "location": {
+      "title": "Ubicació",
+      "text": "Terrassa (Barcelona). Properament detallarem el recinte i la logística."
+    },
+    "faq": {
+      "title": "FAQ",
+      "textPrefix": "Més detalls aviat. Dubtes? Contacta a",
+      "instagram": "Instagram"
+    },
+    "form": {
+      "title": "Preinscripció BYUT 2026",
+      "subtle": "Completeu tots els camps i accepteu la política de dades."
+    },
+    "labels": {
+      "firstName": "Nom",
+      "lastName": "Cognoms",
+      "email": "Correu electrònic",
+      "captcha": "Verificació"
+    },
+    "tooltip": {
+      "text": "La preinscripció no garanteix plaça. Tothom qui es preinscrigui rebrà un correu amb invitació personal per inscriure’s abans que s’obri la inscripció general. Les dades personals s’utilitzen només per a la preinscripció i recordatoris, i s’eliminaran quan s’obri la inscripció oficial després d’enviar els recordatoris."
+    },
+    "consent": {
+      "label": "Autoritzo l’emmagatzematge de les meves dades personals d’acord amb la legislació vigent a Espanya, només per a la preinscripció i recordatoris. Les dades s’eliminaran quan s’obri la inscripció oficial després d’enviar els recordatoris."
+    },
+    "actions": {
+      "submit": "Preinscriure",
+      "registerAnother": "Preinscriure una altra persona"
+    },
+    "status": { "submitting": "Enviant…" },
+    "success": {
+      "title": "Ja formes part de la llista 🎉",
+      "message": "Gràcies per la preinscripció. T’enviarem una invitació personal abans que s’obri la inscripció general.",
+      "duplicateTitle": "Ja estàs preinscrit ✅",
+      "duplicateMessage": "Aquest correu ja és a la nostra llista de preinscripcions."
+    },
+    "summary": { "label": "Resum:" },
+    "errors": {
+      "completeAllFields": "Completeu tots els camps.",
+      "invalidEmail": "Introduïu un correu electrònic vàlid.",
+      "mustGrantPermission": "Heu d’acceptar la política de dades.",
+      "endpointMissing": "El punt d’enviament no està configurat.",
+      "captchaRequired": "Completeu el CAPTCHA.",
+      "captchaFailed": "La verificació de CAPTCHA ha fallat. Torneu-ho a provar.",
+      "genericSubmitProblem": "Hi ha hagut un problema amb l’enviament. Torneu-ho a provar més tard."
+    }
+  },
+  "es": {
+    "wip": "🚧 En progreso... ¡Estad atentos! 🚧",
+    "saveDate": "Guardate la fecha 📅 - 14 Marzo 2026",
+    "nav": {
+      "home": "Inicio",
+      "format": "Reglamento",
+      "course": "Circuito",
+      "schedule": "Horarios",
+      "location": "Ubicación",
+      "faq": "FAQ",
+      "preregister": "Preinscripción"
+    },
+    "about": {
+      "title": "Acerca de",
+      "text": "El sábado 14 de marzo de 2026 comenzará la primera edición de la Backyard Ultra Terrassa. La BYUT nace con la idea de contribuir solidariamente a la comunidad Backyard. Gracias al fantástico terreno de Terrassa, el circuito incluye un desnivel medio y zonas sombreadas cerca del arroyo de la Betzuca (\"Torrent de la Batzuca\").",
+      "linkPrefix": "Más información en la página oficial:",
+      "linkText": "Ficha del evento"
+    },
+    "format": {
+      "title": "Reglamento",
+      "points": [
+        "Cada hora en punto ⏰ empiezas una vuelta de 6,7 km.",
+        "Tienes 60:00 para terminar. ¿Llegas antes? Descansa; ¿tarde? DNF.",
+        "Sin “ahorro de tiempo” 💳 — los minutos sobrantes no se acumulan.",
+        "Debes estar en el “corral” al inicio 🔔. Si no estás, DNF.",
+        "Sin pacers ni ayuda externa en el circuito. Asistencia solo en el corral 🥤.",
+        "Gana el Último en Pie 🏆; el resto son DNF (¡por diseño!).",
+        "La estrategia cuenta: comer, beber, cambiar capas, cargar luces 🔋 — repetir.",
+        "Circuito marcado; trae luz para la noche 🌙 y una sonrisa para el amanecer 🌅.",
+        "No puedes hacer más vueltas que Oriol Antolí 😉 (102 vueltas — récord de España y coorganizador)."
+      ]
+    },
+    "course": {
+      "title": "Circuito",
+      "distance": "Distancia",
+      "elevation": "Desnivel positivo",
+      "downloadGpx": "Descargar GPX",
+      "viewOnStrava": "Ver en Strava",
+      "route": "Ruta"
+    },
+    "schedule": {
+      "title": "Horarios",
+      "items": [
+        "Retirada de dorsales: Pendiente",
+        "Briefing: Pendiente",
+        "Salida: 14 Marzo 2026 — 08:00"
+      ]
+    },
+    "location": {
+      "title": "Ubicación",
+      "text": "Terrassa (Barcelona). Próximamente, recinto y logística."
+    },
+    "faq": {
+      "title": "FAQ",
+      "textPrefix": "Más detalles pronto. ¿Dudas? Contáctanos en",
+      "instagram": "Instagram"
+    },
+    "form": {
+      "title": "Preinscripción BYUT 2026",
+      "subtle": "Completa todos los campos y acepta la política de datos."
+    },
+    "labels": {
+      "firstName": "Nombre",
+      "lastName": "Apellidos",
+      "email": "Correo electrónico",
+      "captcha": "Verificación"
+    },
+    "tooltip": {
+      "text": "La preinscripción no garantiza plaza. Quienes se preinscriban recibirán un correo con invitación personal para inscribirse antes de la apertura general. Los datos personales se usan solo para la preinscripción y recordatorios, y se eliminarán cuando se abra la inscripción oficial tras enviar los recordatorios."
+    },
+    "consent": {
+      "label": "Autorizo el almacenamiento de mis datos personales conforme a la legislación vigente en España, únicamente para preinscripción y recordatorios. Los datos se eliminarán cuando se abra la inscripción oficial tras enviar los recordatorios."
+    },
+    "actions": {
+      "submit": "Preinscribirse",
+      "registerAnother": "Preinscribir a otra persona"
+    },
+    "status": { "submitting": "Enviando…" },
+    "success": {
+      "title": "Estás en la lista 🎉",
+      "message": "Gracias por preinscribirte. Te enviaremos una invitación personal antes de la apertura general.",
+      "duplicateTitle": "Ya está preinscrito ✅",
+      "duplicateMessage": "Este correo ya figura en nuestra lista de preinscripción."
+    },
+    "summary": { "label": "Resumen:" },
+    "errors": {
+      "completeAllFields": "Completa todos los campos.",
+      "invalidEmail": "Introduce un correo electrónico válido.",
+      "mustGrantPermission": "Debes aceptar la política de datos.",
+      "endpointMissing": "El endpoint no está configurado.",
+      "captchaRequired": "Completa el CAPTCHA.",
+      "captchaFailed": "La verificación de CAPTCHA falló. Inténtalo de nuevo.",
+      "genericSubmitProblem": "Hubo un problema con el envío. Inténtalo más tarde."
+    }
+  },
+  "en": {
+    "wip": "🚧 Work in Progress... Stay tuned! 🚧",
+    "saveDate": "Save the date 📅 - 14 March 2026",
+    "nav": {
+      "home": "Home",
+      "format": "Rules",
+      "course": "Course",
+      "schedule": "Schedule",
+      "location": "Location",
+      "faq": "FAQ",
+      "preregister": "Preregister"
+    },
+    "about": {
+      "title": "About",
+      "text": "On Saturday March 14th 2026, the first edition of the Backyard Ultra Terrassa will start. Backyard Ultra Terrassa was born from the idea to contribute to charity and the Backyard community. Thanks to the fantastic terrain around the city of Terrassa, this course includes mid elevation gain and a shadowy terrain close to the Batzuca creek \"Torrent de la Batzuca\".",
+      "linkPrefix": "Learn more on the official Backyard Ultra page:",
+      "linkText": "Event listing"
+    },
+    "format": {
+      "title": "Rules",
+      "points": [
+        "Every hour on the hour ⏰ you start a 6.7 km loop.",
+        "You’ve got 60:00 to finish. Arrive early? Rest. Arrive late? DNF.",
+        "No time banking 💳 — unused minutes don’t carry over.",
+        "Be inside the start corral at the bell 🔔. Not there at the start = DNF.",
+        "No pacers, no external aid on course. Crew/aid only in the corral 🥤.",
+        "Last One Standing wins 🏆; everyone else is officially a DNF (by design!).",
+        "Strategy matters: eat, drink, change layers, charge lights 🔋 — repeat.",
+        "Course is marked; bring lights for night laps 🌙 and a smile for sunrise 🌅.",
+        "You can’t do more loops than Oriol Antolí 😉 (102-loop Spanish record and BYUT co-organizer!)."
+      ]
+    },
+    "course": {
+      "title": "Course",
+      "distance": "Distance",
+      "elevation": "Elevation gain",
+      "downloadGpx": "Download GPX",
+      "viewOnStrava": "View on Strava",
+      "route": "Route"
+    },
+    "schedule": {
+      "title": "Schedule",
+      "items": [
+        "Bib pickup: TBA",
+        "Briefing: TBA",
+        "Start: 14 March 2026 — 08:00"
+      ]
+    },
+    "location": {
+      "title": "Location",
+      "text": "Terrassa (Barcelona). Exact venue and logistics to be announced."
+    },
+    "faq": {
+      "title": "FAQ",
+      "textPrefix": "More details coming soon. Questions? Contact us on",
+      "instagram": "Instagram"
+    },
+    "form": {
+      "title": "Preregister for BYUT 2026",
+      "subtle": "Please complete all fields and accept the data policy."
+    },
+    "labels": {
+      "firstName": "Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "captcha": "Verification"
+    },
+    "tooltip": {
+      "text": "Preregistration does not guarantee entry. Everyone who preregisters will receive a personal email invitation to register before general registration opens. Personal data is used only for preregistration and reminders, and will be deleted when official registration opens after reminders have been sent."
+    },
+    "consent": {
+      "label": "I authorize the storage of my personal data in accordance with current Spanish legislation, solely for preregistration and reminders. Data will be deleted when official registration opens after reminders have been sent."
+    },
+    "actions": {
+      "submit": "Preregister",
+      "registerAnother": "Pre-register someone else"
+    },
+    "status": { "submitting": "Submitting…" },
+    "success": {
+      "title": "You're on the list 🎉",
+      "message": "Thank you for preregistering. We’ll email you a personal invitation before general registration opens.",
+      "duplicateTitle": "Already preregistered ✅",
+      "duplicateMessage": "This email is already on our preregistration list."
+    },
+    "summary": { "label": "Summary:" },
+    "errors": {
+      "completeAllFields": "Please complete all fields.",
+      "invalidEmail": "Please enter a valid email address.",
+      "mustGrantPermission": "You must accept the data policy.",
+      "endpointMissing": "Submission endpoint is not configured.",
+      "captchaRequired": "Please complete the CAPTCHA.",
+      "captchaFailed": "CAPTCHA verification failed. Please try again.",
+      "genericSubmitProblem": "There was a problem submitting your preregistration. Please try again later."
+    }
+  }
+}
+
