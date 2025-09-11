@@ -41,7 +41,7 @@ body {
   width: 130vmax;
   height: 130vmax;
   transform: rotate(-18deg);
-  background-image: url("Elevationv1.png");
+  background-image: url("assets/Elevationv1.png");
 }
 .bg::after {
   bottom: -25%;
@@ -49,9 +49,10 @@ body {
   width: 130vmax;
   height: 130vmax;
   transform: rotate(22deg);
-  background-image: url("mapv1.png");
+  background-image: url("assets/mapv1.png");
 }
-body > *:not(.bg) {
+/* Ensure fixed-position UI (nav, language switcher, back-to-top) are not overridden */
+body > *:not(.bg):not(.nav):not(.lang-switcher):not(.to-top) {
   position: relative;
   z-index: 1;
 }
@@ -252,7 +253,7 @@ p {
   align-items: center;
   margin-top: 30px;
   width: 100%;
-  /* max-width: 600px; */
+  max-width: 600px;
 }
 
 .logo-container img {
