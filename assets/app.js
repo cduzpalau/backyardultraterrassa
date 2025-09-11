@@ -47,6 +47,7 @@
         if (diff > 0 && y > minY) nav.classList.add("nav--hidden");
         else nav.classList.remove("nav--hidden");
         lastY = y;
+        try { positionLangSwitcher(); } catch (_) {}
       }
       ticking = false;
     }
@@ -63,7 +64,8 @@
 
     // ===== i18n support =====
     const I18N_KEY = "byut_lang";
-    const langBtns = Array.from(document.querySelectorAll(".lang-btn"));
+    const langSelect = document.getElementById("lang-select");
+    const langSwitcher = document.querySelector(".lang-switcher");
     let currentLang = localStorage.getItem(I18N_KEY) || "ca";
     let i18n = {};
 
@@ -156,29 +158,38 @@
       document.getElementById("tooltip-text").textContent = t("tooltip.text");
     }
 
-    function updateLangButtons() {
-      langBtns.forEach((btn) =>
-        btn.classList.toggle("active", btn.dataset.lang === currentLang)
-      );
+    function syncLangUI() {
+      if (langSelect && langSelect.value !== currentLang) {
+        langSelect.value = currentLang;
+      }
     }
 
-    langBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const lang = btn.dataset.lang;
-        if (!lang || lang === currentLang) return;
-        currentLang = lang;
-        try {
-          localStorage.setItem(I18N_KEY, currentLang);
-        } catch (_) {}
-        updateLangButtons();
-        applyI18n();
-      });
+    langSelect?.addEventListener("change", () => {
+      const lang = langSelect.value;
+      if (!lang || lang === currentLang) return;
+      currentLang = lang;
+      try {
+        localStorage.setItem(I18N_KEY, currentLang);
+      } catch (_) {}
+      syncLangUI();
+      applyI18n();
     });
 
     // Load translations then apply
     await loadTranslations();
-    updateLangButtons();
+    syncLangUI();
     applyI18n();
+
+    // Position language switcher just below the nav
+    function positionLangSwitcher() {
+      if (!langSwitcher || !nav) return;
+      const hidden = nav.classList.contains("nav--hidden");
+      const top = hidden ? 8 : (nav.offsetHeight || 48) + 8;
+      langSwitcher.style.top = `${top}px`;
+      // Mirror nav hide/show animation
+      langSwitcher.classList.toggle("nav--hidden", hidden);
+    }
+    positionLangSwitcher();
 
     // ===== Preregistration form logic =====
     const GOOGLE_APPS_SCRIPT_URL =
@@ -335,10 +346,10 @@
       else toTopBtn.classList.remove("show");
     };
     window.addEventListener("scroll", toggleTop, { passive: true });
-    window.addEventListener("load", toggleTop);
+    window.addEventListener("load", () => { toggleTop(); positionLangSwitcher(); });
+    window.addEventListener("resize", () => { try { positionLangSwitcher(); } catch (_) {} }, { passive: true });
     toTopBtn?.addEventListener("click", () =>
       window.scrollTo({ top: 0, behavior: "smooth" })
     );
   });
 })();
-
