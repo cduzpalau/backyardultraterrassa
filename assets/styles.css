@@ -5,6 +5,11 @@
 html {
   scroll-behavior: smooth;
 }
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* prevent accidental horizontal scroll on mobile */
+}
 body {
   background-color: #121212;
   color: #ffffff;
@@ -24,6 +29,7 @@ body {
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  overflow: hidden; /* clip large decorative pseudo-elements */
 }
 .bg::before,
 .bg::after {
@@ -402,6 +408,7 @@ button[disabled] {
   padding: 10px 12px;
   border-radius: 8px;
   width: 280px;
+  max-width: calc(100vw - 24px); /* avoid viewport overflow on small screens */
   font-size: 0.9rem;
   line-height: 1.3;
   transition: opacity 0.15s ease-in-out;
