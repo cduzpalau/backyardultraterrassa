@@ -1,7 +1,6 @@
 // Main client script for BYUT
 // - Nav active state and smart header
 // - i18n loading + application
-// - Preregistration form submission
 // - Hash navigation and back-to-top button
 
 (function () {
@@ -92,8 +91,6 @@
 
     function applyI18n() {
       const points = i18n[currentLang]?.format?.points || [];
-      document.getElementById("status-text").textContent = t("wip");
-      document.getElementById("std-text").textContent = t("saveDate");
       document.getElementById("nav-home").textContent = t("nav.home");
       document.getElementById("nav-format").textContent = t("nav.format");
       document.getElementById("nav-course").textContent = t("nav.course");
@@ -112,18 +109,8 @@
       const fl = document.getElementById("format-list");
       fl.innerHTML = points.map((p) => `<li>${p}</li>`).join("");
       document.getElementById("course-title").textContent = t("course.title");
-      document.getElementById("course-stats").innerHTML = `${t(
-        "course.distance"
-      )}: <strong>6.7 km</strong> · ${t(
-        "course.elevation"
-      )}: <strong>102 m D+</strong>`;
-      document.getElementById("course-links").innerHTML = `${t(
-        "course.downloadGpx"
-      )}: <a href="assets/BYUTv1.gpx" download>BYUTv1.gpx</a> · ${t(
-        "course.viewOnStrava"
-      )}: <a href="https://www.strava.com/routes/3400246284944316632" target="_blank" rel="noopener">${t(
-        "course.route"
-      )}</a>`;
+      document.getElementById("course-stats").innerHTML = `${t("course.distance")}: <strong>6.7 km</strong> · ${t("course.elevation")}: <strong>103 m D+</strong>`;
+      document.getElementById("course-links").innerHTML = `${t("course.downloadGpx")}: <a href="assets/BYUT2026.gpx" download>BYUT2026.gpx</a> · ${t("course.viewOnStrava")}: <a href="https://www.strava.com/routes/3421071549788322054" target="_blank" rel="noopener">${t("course.route")}</a>`;
       document.getElementById("location-title").textContent = t(
         "location.title"
       );
@@ -136,25 +123,11 @@
       )} <a href="https://www.instagram.com/backyardultraterrassa/" target="_blank" rel="noopener">${t(
         "faq.instagram"
       )}</a>.`;
+      // News banner
+      const newsEl = document.querySelector('.news-message');
+      if (newsEl) newsEl.textContent = t('news.message');
       document.getElementById("prereg-title").textContent = t("form.title");
       document.getElementById("form-subtle").textContent = t("form.subtle");
-      document.getElementById("label-firstName").textContent = t(
-        "labels.firstName"
-      );
-      document.getElementById("label-lastName").textContent = t(
-        "labels.lastName"
-      );
-      document.getElementById("label-email").textContent = t("labels.email");
-      document.getElementById("label-captcha").textContent = t(
-        "labels.captcha"
-      );
-      document.getElementById("label-consent").textContent = t(
-        "consent.label"
-      );
-      document.getElementById("submit-btn").textContent = t("actions.submit");
-      document.getElementById("register-another-btn").textContent = t(
-        "actions.registerAnother"
-      );
       document.getElementById("tooltip-text").textContent = t("tooltip.text");
     }
 
@@ -191,145 +164,7 @@
     }
     positionLangSwitcher();
 
-    // ===== Preregistration form logic =====
-    const GOOGLE_APPS_SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbwfFER8-DY0dJJ-HEn35BiqZ3bURLoXdmIybdluH7NKGpDLct4kkhS1GD6UFMdDH687nQ/exec";
-
-    const form = document.getElementById("prereg-form");
-    const submitBtn = document.getElementById("submit-btn");
-    const errorBox = document.getElementById("form-error");
-    const statusText = document.getElementById("submit-status");
-    const successCard = document.getElementById("prereg-success");
-    const preregCard = document.getElementById("prereg-card");
-    const successTitle = document.getElementById("success-title");
-    const successMessage = document.getElementById("success-message");
-    const successSummary = document.getElementById("success-summary");
-    const registerAnotherBtn = document.getElementById("register-another-btn");
-
-    function showError(msg) {
-      if (!errorBox) return;
-      errorBox.style.display = "block";
-      errorBox.textContent = msg;
-    }
-    function clearError() {
-      if (!errorBox) return;
-      errorBox.style.display = "none";
-      errorBox.textContent = "";
-    }
-    function isValidEmail(email) {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-      return re.test(String(email).trim());
-    }
-    function setSubmitting(submitting) {
-      if (submitBtn) submitBtn.disabled = submitting;
-      if (statusText)
-        statusText.textContent = submitting ? t("status.submitting") : "";
-    }
-    function showSuccess({ firstName, lastName, email, duplicate = false }) {
-      if (preregCard) preregCard.style.display = "none";
-      if (successCard) successCard.style.display = "block";
-      if (successTitle)
-        successTitle.textContent = duplicate
-          ? t("success.duplicateTitle")
-          : t("success.title");
-      if (successMessage)
-        successMessage.textContent = duplicate
-          ? t("success.duplicateMessage")
-          : t("success.message");
-      if (successSummary) {
-        const parts = [firstName, lastName, email].filter(Boolean);
-        successSummary.textContent = `${t("summary.label")} ${parts.join(
-          " · "
-        )}`;
-      }
-    }
-
-    form?.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      clearError();
-
-      const firstName = document.getElementById("firstName")?.value?.trim() || "";
-      const lastName = document.getElementById("lastName")?.value?.trim() || "";
-      const email = document.getElementById("email")?.value?.trim() || "";
-      const consent = Boolean(document.getElementById("consent")?.checked);
-
-      if (!firstName || !lastName || !email) {
-        showError(t("errors.completeAllFields"));
-        return;
-      }
-      if (!isValidEmail(email)) {
-        showError(t("errors.invalidEmail"));
-        return;
-      }
-      if (!consent) {
-        showError(t("errors.mustGrantPermission"));
-        return;
-      }
-      if (!GOOGLE_APPS_SCRIPT_URL) {
-        showError(t("errors.endpointMissing"));
-        return;
-      }
-
-      setSubmitting(true);
-      try {
-        const captchaToken =
-          typeof grecaptcha !== "undefined" && grecaptcha
-            ? grecaptcha.getResponse()
-            : "";
-        if (!captchaToken) {
-          showError(t("errors.captchaRequired"));
-          return;
-        }
-
-        const body = new URLSearchParams({
-          firstName,
-          lastName,
-          email,
-          lang: currentLang,
-          captcha: captchaToken,
-        });
-        const resp = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-          body,
-        });
-        if (!resp.ok) throw new Error(`Request failed: ${resp.status}`);
-        const data = await resp.json().catch(() => ({}));
-        if (data && data.success === true) {
-          showSuccess({ firstName, lastName, email, duplicate: false });
-        } else if (data && data.error === "duplicate_email") {
-          showSuccess({ firstName, lastName, email, duplicate: true });
-        } else if (data && data.error === "captcha_failed") {
-          showError(t("errors.captchaFailed"));
-        } else if (data && typeof data.error === "string") {
-          showError(data.error);
-        } else {
-          showError(t("errors.genericSubmitProblem"));
-        }
-      } catch (err) {
-        console.error(err);
-        showError(t("errors.genericSubmitProblem"));
-      } finally {
-        setSubmitting(false);
-        try {
-          if (typeof grecaptcha !== "undefined" && grecaptcha) grecaptcha.reset();
-        } catch (_) {}
-      }
-    });
-
-    registerAnotherBtn?.addEventListener("click", () => {
-      try {
-        form?.reset();
-      } catch (_) {}
-      clearError();
-      if (statusText) statusText.textContent = "";
-      if (successCard) successCard.style.display = "none";
-      if (preregCard) preregCard.style.display = "block";
-      try {
-        if (typeof grecaptcha !== "undefined" && grecaptcha) grecaptcha.reset();
-      } catch (_) {}
-      document.getElementById("firstName")?.focus();
-    });
+    // Preregistration form logic removed
 
     // ===== Hash navigation (smooth on older browsers) =====
     window.addEventListener("hashchange", () => {

@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Backyard Ultra Terrassa — a last runner standing race in Terrassa (Barcelona). 6.7 km loop with 102 m D+. See rules, course, location, FAQ and preregister for 2026." />
+    <meta
+      name="description"
+      content="Backyard Ultra Terrassa — a last runner standing race in Terrassa (Barcelona). 6.7 km loop with 102 m D+. See rules, course, location, FAQ. Registration opening soon."
+    />
     <title>Backyard Ultra Terrassa</title>
     <link rel="stylesheet" href="assets/styles.css" />
     <link rel="canonical" href="https://backyardultraterrassa.cat/" />
@@ -16,7 +19,7 @@
       <a id="nav-course" href="#course">Course</a>
       <a id="nav-location" href="#location">Location</a>
       <a id="nav-faq" href="#faq">FAQ</a>
-      <a id="nav-preregister" href="#preregister">Preregister</a>
+      <a id="nav-preregister" href="#preregister">Registration</a>
     </header>
     <div class="lang-switcher" aria-label="Language">
       <label for="lang-select" class="visually-hidden">Language</label>
@@ -38,9 +41,31 @@
           />
         </a>
       </div>
-      <h1 id="page-title">🏃‍♂️ Backyard Ultra Terrassa 🏃‍♀️</h1>
-      <p id="status-text"></p>
-      <p id="std-text"></p>
+      <div class="wordmark-wrap">
+        <svg
+          class="wordmark"
+          viewBox="0 0 1000 160"
+          role="img"
+          aria-labelledby="wmTitle"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <title id="wmTitle">Backyard Ultra Terrassa - INVICTUS</title>
+          <defs>
+            <style>
+              .wm-main { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif; font-weight: 800; font-size: 60px; letter-spacing: 2.5px; text-transform: uppercase; fill: #fff; }
+              .wm-sub { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 10px; fill: #ffffff; opacity: 0.9; text-anchor: middle; }
+              .wm-rule { stroke: #ffffff; stroke-width: 2; stroke-linecap: round; opacity: 0.18; }
+            </style>
+          </defs>
+          <text x="40" y="74" class="wm-main">BACKYARD ULTRA TERRASSA</text>
+          <line x1="40" y1="96" x2="960" y2="96" class="wm-rule" />
+          <text x="500" y="142" class="wm-sub">– INVICTUS –</text>
+        </svg>
+      </div>
+      <div class="news-banner" role="status" aria-live="polite">
+        <div class="news-badge">NEWS</div>
+        <div class="news-message">20250110 09:30 - 📣 Preregistrations are now closed. 🏁 Registrations will open soon — stay tuned.</div>
+      </div>
       <div
         class="section"
         style="text-align: left; max-width: 860px; margin: 16px auto 0 auto"
@@ -73,21 +98,16 @@
       <h2 id="course-title">Course</h2>
       <p id="course-stats">
         Distance: <strong>6.7 km</strong> · Elevation gain:
-        <strong>102 m D+</strong>
+        <strong>103 m D+</strong>
       </p>
       <div class="grid two">
-        <div class="img-card">
-          <img src="assets/mapv1.png" alt="Course map" />
-        </div>
-        <div class="img-card">
-          <img src="assets/Elevationv1.png" alt="Course elevation profile" />
-        </div>
+        <div class="strava-embed-placeholder" data-embed-type="route" data-embed-id="3421071549788322054" data-units="metric" data-full-width="true" data-style="satellite" data-terrain="2d" data-surface-type="true" data-map-hash="12.29/41.57465/2.04776" data-from-embed="true"></div><script src="https://strava-embeds.com/embed.js"></script>
       </div>
       <p id="course-links" style="margin-top: 12px">
-        Download GPX: <a href="assets/BYUTv1.gpx" download>BYUTv1.gpx</a> · View
-        on Strava:
+        Download GPX: <a href="assets/BYUT2026.gpx" download>BYUT2026.gpx</a> ·
+        View on Strava:
         <a
-          href="https://www.strava.com/routes/3400246284944316632"
+          href="https://www.strava.com/routes/3421071549788322054"
           target="_blank"
           rel="noopener"
           >Route</a
@@ -134,94 +154,11 @@
           </span>
         </div>
         <p id="form-subtle" class="subtle"></p>
-
-        <form id="prereg-form" novalidate>
-          <div class="row">
-            <div class="field">
-              <label for="firstName" id="label-firstName">Name</label>
-              <input
-                id="firstName"
-                name="firstName"
-                type="text"
-                autocomplete="given-name"
-                required
-              />
-            </div>
-            <div class="field">
-              <label for="lastName" id="label-lastName">Last Name</label>
-              <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                autocomplete="family-name"
-                required
-              />
-            </div>
-          </div>
-          <div class="field">
-            <label for="email" id="label-email">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              inputmode="email"
-              autocomplete="email"
-              required
-            />
-          </div>
-
-          <div class="checkbox">
-            <input id="consent" name="consent" type="checkbox" required />
-            <label id="label-consent" for="consent"></label>
-          </div>
-
-          <div
-            id="form-error"
-            class="error"
-            role="alert"
-            aria-live="polite"
-            style="display: none"
-          ></div>
-
-          <!-- reCAPTCHA -->
-          <div class="field">
-            <label for="captcha" id="label-captcha">Verification</label>
-            <div
-              class="g-recaptcha"
-              data-sitekey="6Lcm9L8rAAAAAEF5QyxE568jiw-XeEGT4VnvFsib"
-              data-theme="dark"
-            ></div>
-          </div>
-
-          <div class="actions">
-            <button id="submit-btn" type="submit">Preregister</button>
-            <span id="submit-status" class="subtle" aria-live="polite"></span>
-          </div>
-        </form>
-      </div>
-
-      <div id="prereg-success" class="card" style="display: none">
-        <h2 id="success-title">You're on the list 🎉</h2>
-        <p id="success-message" class="success">
-          Thank you for preregistering. We’ll email you a personal invitation
-          before general registration opens.
-        </p>
-        <div id="success-summary" class="subtle" aria-live="polite"></div>
-        <div class="actions" style="margin-top: 12px">
-          <button id="register-another-btn" type="button">
-            Pre-register someone else
-          </button>
-        </div>
       </div>
     </section>
 
     <script src="assets/app.js" defer></script>
-    <!-- reCAPTCHA API (Catalan by default) -->
-    <script
-      src="https://www.google.com/recaptcha/api.js?hl=ca"
-      async
-      defer
-    ></script>
+    <!-- reCAPTCHA API removed while preregistrations are closed -->
     <button
       id="to-top"
       class="to-top"
@@ -232,8 +169,6 @@
       <img src="assets/logodarkmode.png" alt="Backyard Ultra Terrassa" />
     </button>
 
-    <div class="main-content">
-    </div>
-    
+    <div class="main-content"></div>
   </body>
 </html>

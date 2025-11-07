@@ -170,9 +170,58 @@ section {
 .hero {
   text-align: center;
 }
+.news-banner {
+  margin: 12px auto 0 auto;
+  padding: 14px 14px 12px 14px;
+  width: 100%;
+  max-width: 860px;
+  background: #121212; /* same as page */
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  /* chiseled/inset look */
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.55),
+    0 6px 18px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+.news-badge {
+  position: absolute;
+  top: -12px;
+  left: 14px;
+  padding: 3px 8px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  color: #fff;
+  background: #121212; /* blend with page */
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.55);
+}
+.news-message {
+  color: #fff;
+  font-family: Roboto, Inter, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  letter-spacing: 0.2px;
+  text-align: left;
+}
+.wordmark-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0 4px 0;
+}
+.wordmark {
+  width: min(96vw, 1000px);
+  height: auto;
+}
 .section h2 {
   margin: 0 0 8px 0;
-  font-size: 1.6rem;
+  font-size: 1.35rem;
 }
 .muted {
   color: #cfcfcf;
@@ -290,7 +339,7 @@ p {
   }
 }
 
-/* Preregistration form styles */
+/* Preregistration/Info card styles */
 .card {
   background: #1e1e1e;
   border: 1px solid #2a2a2a;
@@ -303,77 +352,12 @@ p {
 }
 .card h2 {
   margin: 0 0 8px 0;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
 }
 .subtle {
   color: #cfcfcf;
   font-size: 0.95rem;
   margin: 0 0 12px 0;
-}
-.row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.field {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 200px;
-  margin-bottom: 12px;
-}
-label {
-  font-size: 0.95rem;
-  margin-bottom: 6px;
-}
-input[type="text"],
-input[type="email"] {
-  background: #121212;
-  color: #fff;
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 1rem;
-  outline: none;
-}
-input[type="text"]:focus,
-input[type="email"]:focus {
-  border-color: #555;
-}
-.checkbox {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin: 8px 0 12px 0;
-}
-.checkbox input {
-  margin-top: 3px;
-}
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-button[type="submit"] {
-  background: #4caf50;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 16px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-button[disabled] {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-.error {
-  color: #ff6b6b;
-  font-size: 0.95rem;
-}
-.success {
-  color: #7cd992;
-  font-size: 1rem;
 }
 /* Tooltip */
 .info {
