@@ -11,6 +11,11 @@
       : document.addEventListener("DOMContentLoaded", fn);
 
   ready(async () => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+    let newsPulseTimer = null;
+
     // ===== Nav highlight on scroll =====
     const nav = document.querySelector(".nav");
     const navLinks = Array.from(document.querySelectorAll(".nav a"));
@@ -124,11 +129,18 @@
         "faq.instagram"
       )}</a>.`;
       // News banner
-      const newsEl = document.querySelector('.news-message');
-      if (newsEl) newsEl.textContent = t('news.message');
+      const newsEl = document.querySelector(".news-message");
+      if (newsEl) newsEl.textContent = t("news.message");
       document.getElementById("prereg-title").textContent = t("form.title");
       document.getElementById("form-subtle").textContent = t("form.subtle");
       document.getElementById("tooltip-text").textContent = t("tooltip.text");
+      const registerBtn = document.getElementById("register-btn");
+      if (registerBtn) {
+        const ctaText = t("form.cta");
+        registerBtn.textContent = ctaText;
+        registerBtn.setAttribute("aria-label", ctaText);
+        registerBtn.setAttribute("title", t("tooltip.text"));
+      }
     }
 
     function syncLangUI() {
@@ -152,6 +164,37 @@
     await loadTranslations();
     syncLangUI();
     applyI18n();
+    // Blink/highlight the news banner at regular intervals
+    function manageNewsPulse() {
+      const messageEl = document.querySelector(".news-message");
+      const bannerEl = document.querySelector(".news-banner");
+      const navRegister = document.getElementById("nav-preregister");
+      if (!messageEl) return;
+      if (prefersReducedMotion.matches) {
+        if (newsPulseTimer) {
+          clearInterval(newsPulseTimer);
+          newsPulseTimer = null;
+        }
+        messageEl.classList.remove("news-flash");
+        bannerEl?.classList.remove("news-flash");
+        navRegister?.classList.remove("nav-flash");
+        return;
+      }
+      if (newsPulseTimer) return;
+      newsPulseTimer = window.setInterval(() => {
+        messageEl.classList.toggle("news-flash");
+        bannerEl?.classList.toggle("news-flash");
+        navRegister?.classList.toggle("nav-flash");
+      }, 1100);
+    }
+    manageNewsPulse();
+    prefersReducedMotion.addEventListener("change", () => {
+      if (newsPulseTimer) {
+        clearInterval(newsPulseTimer);
+        newsPulseTimer = null;
+      }
+      manageNewsPulse();
+    });
 
     // Position language switcher just below the nav
     function positionLangSwitcher() {

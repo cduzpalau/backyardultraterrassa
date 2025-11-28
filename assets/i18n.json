@@ -1,7 +1,7 @@
 {
   "ca": {
     "news": {
-      "message": "20251107 16:00 - 📣 Les preinscripcions han finalitzat. 🏁 Les inscripcions a la cursa s'obriran aviat — estigueu atents."
+      "message": "20251128 - ✨ Inscripcions obertes! 🏛️ Assegura la teva plaça ara."
     },
     "nav": {
       "home": "Inici",
@@ -58,16 +58,17 @@
       "instagram": "Instagram"
     },
     "form": {
-      "title": "Preinscripció BYUT 2026",
-      "subtle": "Les preinscripcions estan tancades. Aviat s'obriran les inscripcions."
+      "title": "Inscriu-te a la BYUT 2026",
+      "subtle": "Inscriu-te ara; fes clic en aquest botó per anar a la pàgina d'inscripció.",
+      "cta": "Anar a la inscripció"
     },
     "tooltip": {
-      "text": "Les preinscripcions estan tancades. Les persones preinscrites rebran un enllaç d'inscripció personal per correu 2 dies abans de l'obertura general."
+      "text": "Inscripcions obertes"
     }
   },
   "es": {
     "news": {
-      "message": "20251107 16:00 - 📣 Las preinscripciones han finalizado. 🏁 Las inscripciones a la carrera se abrirán pronto — estad atentos."
+      "message": "20251128 - ✨ ¡Inscripciones abiertas! 🏛️ Asegura tu plaza ahora."
     },
     "nav": {
       "home": "Inicio",
@@ -124,16 +125,17 @@
       "instagram": "Instagram"
     },
     "form": {
-      "title": "Preinscripción BYUT 2026",
-      "subtle": "Las preinscripciones están cerradas. Pronto se abrirán las inscripciones."
+      "title": "Inscríbete en la BYUT 2026",
+      "subtle": "Inscríbete ahora; haz clic en este botón para ir a la página de inscripción.",
+      "cta": "Ir a la inscripción"
     },
     "tooltip": {
-      "text": "Las preinscripciones están cerradas. Las personas preinscritas recibirán por correo un enlace personal 2 días antes de la apertura general."
+      "text": "Inscripciones abiertas"
     }
   },
   "en": {
     "news": {
-      "message": "20251107 16:00 - 📣 Preregistrations are now closed. 🏁 Registrations will open soon — stay tuned."
+      "message": "20251128 - ✨ Registrations are open! 🏛️ Claim your spot now."
     },
     "nav": {
       "home": "Home",
@@ -190,11 +192,12 @@
       "instagram": "Instagram"
     },
     "form": {
-      "title": "Preregister for BYUT 2026",
-      "subtle": "Preregistrations are closed. Race registrations opening soon."
+      "title": "Register for BYUT 2026",
+      "subtle": "Register now; click this button to go to the registration page.",
+      "cta": "Go to registration"
     },
     "tooltip": {
-      "text": "Preregistrations are closed. Preregistered runners will receive a personal link by email 2 days before general registration opens."
+      "text": "Registrations open"
     }
   }
 }
