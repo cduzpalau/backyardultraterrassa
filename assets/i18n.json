@@ -1,7 +1,7 @@
 {
   "ca": {
     "news": {
-      "message": "20251128 - ✨ Inscripcions obertes! 🏛️ Assegura la teva plaça ara."
+      "message": "20251130 - ✨ Inscripcions Completes! 🏛️ Ja pots unir-te a la llista d'espera."
     },
     "nav": {
       "home": "Inici",
@@ -58,17 +58,17 @@
       "instagram": "Instagram"
     },
     "form": {
-      "title": "Inscriu-te a la BYUT 2026",
-      "subtle": "Inscriu-te ara; fes clic en aquest botó per anar a la pàgina d'inscripció.",
-      "cta": "Anar a la inscripció"
+      "title": "Uneix-te a la llista d'espera per a la BYUT 2026",
+      "subtle": "Inscripcions completes; fes clic en aquest botó per unirt-te a la llista d'espera.",
+      "cta": "Uneix-te a la llista d'espera"
     },
     "tooltip": {
-      "text": "Inscripcions obertes"
+      "text": "Inscripcions completes!"
     }
   },
   "es": {
     "news": {
-      "message": "20251128 - ✨ ¡Inscripciones abiertas! 🏛️ Asegura tu plaza ahora."
+      "message": "20251130 - ✨ ¡Inscripciones Completas en 3 dias! 🏛️ Únete a la lista de espera."
     },
     "nav": {
       "home": "Inicio",
@@ -125,17 +125,17 @@
       "instagram": "Instagram"
     },
     "form": {
-      "title": "Inscríbete en la BYUT 2026",
-      "subtle": "Inscríbete ahora; haz clic en este botón para ir a la página de inscripción.",
-      "cta": "Ir a la inscripción"
+      "title": "Únete a la ista de espera de la BYUT 2026",
+      "subtle": "Inscripciones completas; haz clic en este botón para unirte a la lista de espera",
+      "cta": "Unirte a la lista de espera"
     },
     "tooltip": {
-      "text": "Inscripciones abiertas"
+      "text": "Inscripciones completas"
     }
   },
   "en": {
     "news": {
-      "message": "20251128 - ✨ Registrations are open! 🏛️ Claim your spot now."
+      "message": "20251130 - ✨ Sold out in 3 days! 🏛️ Join the waiting list."
     },
     "nav": {
       "home": "Home",
@@ -192,12 +192,12 @@
       "instagram": "Instagram"
     },
     "form": {
-      "title": "Register for BYUT 2026",
-      "subtle": "Register now; click this button to go to the registration page.",
-      "cta": "Go to registration"
+      "title": "Join the waiting list for BYUT 2026",
+      "subtle": "Registrations Sold Out; click this button to join the waiting list",
+      "cta": "Join Waiting list"
     },
     "tooltip": {
-      "text": "Registrations open"
+      "text": "Registrations Sold Out"
     }
   }
 }
