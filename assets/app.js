@@ -12,7 +12,7 @@
 
   ready(async () => {
     const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     );
     let newsPulseTimer = null;
 
@@ -35,7 +35,7 @@
           }
         });
       },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 }
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 },
     );
     sections.forEach((sec) => observer.observe(sec));
 
@@ -51,7 +51,9 @@
         if (diff > 0 && y > minY) nav.classList.add("nav--hidden");
         else nav.classList.remove("nav--hidden");
         lastY = y;
-        try { positionLangSwitcher(); } catch (_) {}
+        try {
+          positionLangSwitcher();
+        } catch (_) {}
       }
       ticking = false;
     }
@@ -63,7 +65,7 @@
           ticking = true;
         }
       },
-      { passive: true }
+      { passive: true },
     );
 
     // ===== i18n support =====
@@ -101,36 +103,36 @@
       document.getElementById("nav-course").textContent = t("nav.course");
       document.getElementById("nav-location").textContent = t("nav.location");
       document.getElementById("nav-faq").textContent = t("nav.faq");
-      document.getElementById("nav-preregister").textContent = t(
-        "nav.preregister"
-      );
+      document.getElementById("nav-preregister").textContent =
+        t("nav.preregister");
       document.getElementById("about-title").textContent = t("about.title");
       document.getElementById("about-text").textContent = t("about.text");
-      document.getElementById("about-link-prefix").textContent = t(
-        "about.linkPrefix"
-      );
+      document.getElementById("about-link-prefix").textContent =
+        t("about.linkPrefix");
       document.getElementById("about-link").textContent = t("about.linkText");
       document.getElementById("format-title").textContent = t("format.title");
       const fl = document.getElementById("format-list");
       fl.innerHTML = points.map((p) => `<li>${p}</li>`).join("");
       document.getElementById("course-title").textContent = t("course.title");
-      document.getElementById("course-stats").innerHTML = `${t("course.distance")}: <strong>6.7 km</strong> · ${t("course.elevation")}: <strong>103 m D+</strong>`;
-      document.getElementById("course-links").innerHTML = `${t("course.downloadGpx")}: <a href="assets/BYUT2026.gpx" download>BYUT2026.gpx</a> · ${t("course.viewOnStrava")}: <a href="https://www.strava.com/routes/3421071549788322054" target="_blank" rel="noopener">${t("course.route")}</a>`;
-      document.getElementById("location-title").textContent = t(
-        "location.title"
-      );
-      document.getElementById("location-text").textContent = t(
-        "location.text"
-      );
+      document.getElementById("course-stats").innerHTML =
+        `${t("course.distance")}: <strong>6.7 km</strong> · ${t("course.elevation")}: <strong>103 m D+</strong>`;
+      document.getElementById("course-links").innerHTML =
+        `${t("course.downloadGpx")}: <a href="assets/BYUT2026.gpx" download>BYUT2026.gpx</a> · ${t("course.viewOnStrava")}: <a href="https://www.strava.com/routes/3421071549788322054" target="_blank" rel="noopener">${t("course.route")}</a>`;
+      document.getElementById("location-title").textContent =
+        t("location.title");
+      document.getElementById("location-text").textContent = t("location.text");
       document.getElementById("faq-title").textContent = t("faq.title");
       document.getElementById("faq-text").innerHTML = `${t(
-        "faq.textPrefix"
+        "faq.textPrefix",
       )} <a href="https://www.instagram.com/backyardultraterrassa/" target="_blank" rel="noopener">${t(
-        "faq.instagram"
+        "faq.instagram",
       )}</a>.`;
       // News banner
       const newsEl = document.querySelector(".news-message");
-      if (newsEl) newsEl.textContent = t("news.message");
+      if (newsEl) {
+        newsEl.innerHTML = `${t("news.message")}<br><a href="#" id="news-link" style="color: #ffd260; text-decoration: underline; font-weight: bold;">${t("news.link")}</a>`;
+        attachModalEvents(); // Re-attach event because innerHTML replaced the element
+      }
       document.getElementById("prereg-title").textContent = t("form.title");
       document.getElementById("form-subtle").textContent = t("form.subtle");
       document.getElementById("tooltip-text").textContent = t("tooltip.text");
@@ -141,6 +143,15 @@
         registerBtn.setAttribute("aria-label", ctaText);
         registerBtn.setAttribute("title", t("tooltip.text"));
       }
+      // Modal content update
+      document.getElementById("modal-title").textContent = t(
+        "communication.title",
+      );
+      document.getElementById("modal-content").innerHTML =
+        t("communication.body");
+      document
+        .getElementById("modal-close")
+        .setAttribute("aria-label", t("communication.close"));
     }
 
     function syncLangUI() {
@@ -164,6 +175,41 @@
     await loadTranslations();
     syncLangUI();
     applyI18n();
+
+    // ===== Modal Logic =====
+    const modalOverlay = document.getElementById("modal-overlay");
+    const modalCloseBtn = document.getElementById("modal-close");
+
+    function openModal(e) {
+      if (e) e.preventDefault();
+      modalOverlay.classList.add("open");
+      modalOverlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden"; // Prevent background scrolling
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove("open");
+      modalOverlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    function attachModalEvents() {
+      const newsLink = document.getElementById("news-link");
+      if (newsLink) {
+        newsLink.addEventListener("click", openModal);
+      }
+    }
+
+    modalCloseBtn?.addEventListener("click", closeModal);
+    modalOverlay?.addEventListener("click", (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modalOverlay.classList.contains("open")) {
+        closeModal();
+      }
+    });
+
     // Blink/highlight the news banner at regular intervals
     function manageNewsPulse() {
       const messageEl = document.querySelector(".news-message");
@@ -212,8 +258,7 @@
     // ===== Hash navigation (smooth on older browsers) =====
     window.addEventListener("hashchange", () => {
       const target = document.querySelector(location.hash || "#home");
-      if (target)
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
     // ===== Back-to-top button =====
@@ -224,10 +269,21 @@
       else toTopBtn.classList.remove("show");
     };
     window.addEventListener("scroll", toggleTop, { passive: true });
-    window.addEventListener("load", () => { toggleTop(); positionLangSwitcher(); });
-    window.addEventListener("resize", () => { try { positionLangSwitcher(); } catch (_) {} }, { passive: true });
+    window.addEventListener("load", () => {
+      toggleTop();
+      positionLangSwitcher();
+    });
+    window.addEventListener(
+      "resize",
+      () => {
+        try {
+          positionLangSwitcher();
+        } catch (_) {}
+      },
+      { passive: true },
+    );
     toTopBtn?.addEventListener("click", () =>
-      window.scrollTo({ top: 0, behavior: "smooth" })
+      window.scrollTo({ top: 0, behavior: "smooth" }),
     );
   });
 })();

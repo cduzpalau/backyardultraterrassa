@@ -102,6 +102,16 @@
         <div class="news-message">
           20260119 - Race postponed until 2027 due to prevention measures for
           African Swine Fever
+          <br /><a
+            href="#"
+            id="news-link"
+            style="
+              color: #ffd260;
+              text-decoration: underline;
+              font-weight: bold;
+            "
+            >Read official statement</a
+          >
         </div>
       </div>
       <div
@@ -197,20 +207,25 @@
           class="info"
           style="justify-content: space-between; align-items: start"
         >
-          <h2 id="prereg-title">Registrations closed</h2>
+          <h2 id="prereg-title">Register for BYUT 2026</h2>
           <span class="info-icon" tabindex="0" aria-label="Info">
             i
             <span class="tooltip" id="tooltip-text" role="tooltip"></span>
           </span>
         </div>
-        <p id="form-subtle" class="subtle">See you in 2027.</p>
+        <p id="form-subtle" class="subtle">
+          Register now, click this button to be redirected to the registration
+          page.
+        </p>
         <div class="cta-wrap">
           <a
             id="register-btn"
             class="btn-roman"
-            style="pointer-events: none; opacity: 0.6"
+            href="https://www.rockthesport.com/ca/esdeveniment/backyard-ultra-terrassa"
+            target="_blank"
+            rel="noopener"
           >
-            Closed
+            Register now
           </a>
         </div>
       </div>
@@ -227,6 +242,22 @@
     >
       <img src="assets/logodarkmode.png" alt="Backyard Ultra Terrassa" />
     </button>
+
+    <!-- Modal for Official Communication -->
+    <div id="modal-overlay" class="modal-overlay" aria-hidden="true">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
+        <button id="modal-close" class="modal-close" aria-label="Close">
+          &times;
+        </button>
+        <h2 id="modal-title"></h2>
+        <div id="modal-content"></div>
+      </div>
+    </div>
 
     <div class="main-content"></div>
   </body>

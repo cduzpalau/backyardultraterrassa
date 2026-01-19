@@ -1,7 +1,8 @@
 {
   "ca": {
     "news": {
-      "message": "20260119 - Cursa aplaçada fins al 2027 degut a les mesures de prevenció per la Pesta Porcina Africa"
+      "message": "20260119 - Cursa aplaçada fins al 2027 degut a les mesures de prevenció per la Pesta Porcina Africa",
+      "link": "Llegir comunicat oficial"
     },
     "nav": {
       "home": "Inici",
@@ -64,11 +65,17 @@
     },
     "tooltip": {
       "text": "Inscripcions tancades"
+    },
+    "communication": {
+      "title": "Comunicat Oficial",
+      "body": "<p><strong>Benvolguts/des corredors i corredores,</strong></p><p>Ens posem en contacte amb vosaltres amb el cor pesat i una profunda tristesa per comunicar-vos una decisió difícil però inevitable: <strong>ens veiem obligats a aplaçar la celebració de la Backyard Ultra Terrassa fins al març de 2027.</strong></p><p>Com sabeu, la situació epidemiològica derivada de la <strong>Pesta Porcina Africana (PPA)</strong> a la nostra zona segueix sent greu. Actualment, Terrassa es troba dins de la zona d’alt risc i les autoritats han restringit totalment les activitats al medi natural per frenar l’expansió del virus.</p><p>Les perspectives no són favorables a curt termini: no es preveu cap canvi en les restriccions durant els propers dos mesos i aquesta setmana passada es van confirmar 13 nous casos positius.</p><p>Per causa de força major, ens és impossible tirar endavant la cursa aquest 2026. Fins a l’últim moment hem mantingut l’esperança, però per respecte a vosaltres i per responsabilitat, hem decidit moure la cursa al març de 2027. Estem convençuts que per a llavors la situació sanitària estarà totalment solucionada i podrem gaudir de la Backyard com us mereixeu.</p><p><strong>Davant d'aquest canvi de dates, procedirem de la següent manera:</strong></p><ul><li><strong>Devolució total:</strong> En les properes setmanes realitzarem la devolució de l’import de la inscripció a tots els participants de forma automàtica.</li><li><strong>Atenció al corredor:</strong> Si teniu qualsevol dubte o consulta, podeu contactar amb nosaltres directament a <a href='mailto:backyardultraterrassa@gmail.com'>backyardultraterrassa@gmail.com</a>.</li></ul><p>L'organització sent una frustració i una tristesa profunda; teníem moltes ganes de veure-us córrer per Terrassa. Tot i així, creiem que és la decisió més honesta per a tothom.</p><p>Gràcies per la vostra paciència i suport. Ens retrobarem amb més força el 2027.</p><p><em>L'Organització de la Backyard Ultra Terrassa</em></p>",
+      "close": "Tancar"
     }
   },
   "es": {
     "news": {
-      "message": "20260119 - Carrera aplazada hasta 2027 debido a las medidas de prevención por la Peste Porcina Africana"
+      "message": "20260119 - Carrera aplazada hasta 2027 debido a las medidas de prevención por la Peste Porcina Africana",
+      "link": "Leer comunicado oficial"
     },
     "nav": {
       "home": "Inicio",
@@ -131,11 +138,17 @@
     },
     "tooltip": {
       "text": "Inscripciones cerradas"
+    },
+    "communication": {
+      "title": "Comunicado Oficial",
+      "body": "<p><strong>Estimados/as corredores y corredoras,</strong></p><p>Nos ponemos en contacto con vosotros con el corazón pesado y una profunda tristeza para comunicaros una decisión difícil pero inevitable: <strong>nos vemos obligados a aplazar la celebración de la Backyard Ultra Terrassa hasta marzo de 2027.</strong></p><p>Como sabéis, la situación epidemiológica derivada de la <strong>Peste Porcina Africana (PPA)</strong> en nuestra zona sigue siendo grave. Actualmente, Terrassa se encuentra dentro de la zona de alto riesgo y las autoridades han restringido totalmente las actividades en el medio natural para frenar la expansión del virus.</p><p>Las perspectivas no son favorables a corto plazo: no se prevé ningún cambio en las restricciones durante los próximos dos meses y esta semana pasada se confirmaron 13 nuevos casos positivos.</p><p>Por causa de fuerza mayor, nos es imposible llevar a cabo la carrera este 2026. Hasta el último momento hemos mantenido la esperanza, pero por respeto a vosotros y por responsabilidad, hemos decidido mover la carrera a marzo de 2027. Estamos convencidos de que para entonces la situación sanitaria estará totalmente solucionada y podremos disfrutar de la Backyard como os merecéis.</p><p><strong>Ante este cambio de fechas, procederemos de la siguiente manera:</strong></p><ul><li><strong>Devolución total:</strong> En las próximas semanas realizaremos la devolución del importe de la inscripción a todos los participantes de forma automática.</li><li><strong>Atención al corredor:</strong> Si tenéis cualquier duda o consulta, podéis contactar con nosotros directamente en <a href='mailto:backyardultraterrassa@gmail.com'>backyardultraterrassa@gmail.com</a>.</li></ul><p>La organización siente una frustración y una tristeza profunda; teníamos muchas ganas de veros correr por Terrassa. Aún así, creemos que es la decisión más honesta para todos.</p><p>Gracias por vuestra paciencia y apoyo. Nos reencontraremos con más fuerza en 2027.</p><p><em>La Organización de la Backyard Ultra Terrassa</em></p>",
+      "close": "Cerrar"
     }
   },
   "en": {
     "news": {
-      "message": "20260119 - Race postponed until 2027 due to prevention measures for African Swine Fever"
+      "message": "20260119 - Race postponed until 2027 due to prevention measures for African Swine Fever",
+      "link": "Read official statement"
     },
     "nav": {
       "home": "Home",
@@ -198,6 +211,11 @@
     },
     "tooltip": {
       "text": "Registrations closed"
+    },
+    "communication": {
+      "title": "Official Statement",
+      "body": "<p><strong>Dear runners,</strong></p><p>We are contacting you with a heavy heart and deep sadness to communicate a difficult but inevitable decision: <strong>we are forced to postpone the Backyard Ultra Terrassa until March 2027.</strong></p><p>As you know, the epidemiological situation derived from <strong>African Swine Fever (ASF)</strong> in our area remains serious. Currently, Terrassa is within the high-risk zone and authorities have totally restricted activities in the natural environment to curb the spread of the virus.</p><p>The outlook is not favorable in the short term: no changes in restrictions are expected for the next two months, and 13 new positive cases were confirmed last week.</p><p>Due to force majeure, it is impossible for us to go ahead with the race in 2026. Until the last moment we kept hope, but out of respect for you and responsibility, we have decided to move the race to March 2027. We are convinced that by then the health situation will be fully resolved and we will be able to enjoy the Backyard as you deserve.</p><p><strong>Given this change of dates, we will proceed as follows:</strong></p><ul><li><strong>Full refund:</strong> In the coming weeks we will automatically refund the registration fee to all participants.</li><li><strong>Runner support:</strong> If you have any questions or queries, you can contact us directly at <a href='mailto:backyardultraterrassa@gmail.com'>backyardultraterrassa@gmail.com</a>.</li></ul><p>The organization feels deep frustration and sadness; we were really looking forward to seeing you run through Terrassa. However, we believe this is the most honest decision for everyone.</p><p>Thank you for your patience and support. We will meet again stronger in 2027.</p><p><em>The Backyard Ultra Terrassa Organization</em></p>",
+      "close": "Close"
     }
   }
 }
