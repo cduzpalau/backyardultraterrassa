@@ -59,7 +59,8 @@ body {
   background-image: url("assets/mapv1.png");
 }
 /* Ensure fixed-position UI (nav, language switcher, back-to-top) are not overridden */
-body > *:not(.bg):not(.nav):not(.lang-switcher):not(.to-top) {
+body
+  > *:not(.bg):not(.nav):not(.lang-switcher):not(.to-top):not(.modal-overlay) {
   position: relative;
   z-index: 1;
 }
