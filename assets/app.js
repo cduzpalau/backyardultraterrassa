@@ -131,7 +131,6 @@
       const newsEl = document.querySelector(".news-message");
       if (newsEl) {
         newsEl.innerHTML = `${t("news.message")}<br><a href="#" id="news-link" style="color: #ffd260; text-decoration: underline; font-weight: bold;">${t("news.link")}</a>`;
-        attachModalEvents(); // Re-attach event because innerHTML replaced the element
       }
       document.getElementById("prereg-title").textContent = t("form.title");
       document.getElementById("form-subtle").textContent = t("form.subtle");
@@ -171,11 +170,6 @@
       applyI18n();
     });
 
-    // Load translations then apply
-    await loadTranslations();
-    syncLangUI();
-    applyI18n();
-
     // ===== Modal Logic =====
     const modalOverlay = document.getElementById("modal-overlay");
     const modalCloseBtn = document.getElementById("modal-close");
@@ -193,22 +187,27 @@
       document.body.style.overflow = "";
     }
 
-    function attachModalEvents() {
-      const newsLink = document.getElementById("news-link");
-      if (newsLink) {
-        newsLink.addEventListener("click", openModal);
+    // Event delegation for news link (handles both static and dynamic content)
+    document.addEventListener("click", (e) => {
+      if (e.target && e.target.closest("#news-link")) {
+        openModal(e);
       }
-    }
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
 
     modalCloseBtn?.addEventListener("click", closeModal);
-    modalOverlay?.addEventListener("click", (e) => {
-      if (e.target === modalOverlay) closeModal();
-    });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && modalOverlay.classList.contains("open")) {
         closeModal();
       }
     });
+
+    // Load translations then apply
+    await loadTranslations();
+    syncLangUI();
+    applyI18n();
 
     // Blink/highlight the news banner at regular intervals
     function manageNewsPulse() {
