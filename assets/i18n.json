@@ -1,7 +1,7 @@
 {
   "ca": {
     "news": {
-      "message": "20251130 - ✨ Inscripcions Completes! 🏛️ Ja pots unir-te a la llista d'espera."
+      "message": "20260119 - Cursa aplaçada fins al 2027 degut a les mesures de prevenció per la Pesta Porcina Africa"
     },
     "nav": {
       "home": "Inici",
@@ -14,7 +14,7 @@
     },
     "about": {
       "title": "Sobre la cursa",
-      "text": "Dissabte 14 de març de 2026 començarà la primera edició de la Backyard Ultra Terrassa. La BYUT neix amb la idea d’aportar solidàriament a la comunitat Backyard. Gràcies al terreny fantàstic de Terrassa, el circuit té un desnivell moderat i zones ombrívoles a prop de la riera de la Betzuca (\"Torrent de la Batzuca\").",
+      "text": "Al març de 2027 (data final a confirmar) començarà la primera edició de la Backyard Ultra Terrassa. La BYUT neix amb la idea d’aportar solidàriament a la comunitat Backyard. Gràcies al terreny fantàstic de Terrassa, el circuit té un desnivell moderat i zones ombrívoles a prop de la riera de la Betzuca (\"Torrent de la Batzuca\").",
       "linkPrefix": "Més informació a la pàgina oficial:",
       "linkText": "Fitxa de l’esdeveniment"
     },
@@ -58,17 +58,17 @@
       "instagram": "Instagram"
     },
     "form": {
-      "title": "Uneix-te a la llista d'espera per a la BYUT 2026",
-      "subtle": "Inscripcions completes; fes clic en aquest botó per unirt-te a la llista d'espera.",
-      "cta": "Uneix-te a la llista d'espera"
+      "title": "Inscripcions tancades",
+      "subtle": "Ens veiem al 2027.",
+      "cta": "Tancat"
     },
     "tooltip": {
-      "text": "Inscripcions completes!"
+      "text": "Inscripcions tancades"
     }
   },
   "es": {
     "news": {
-      "message": "20251130 - ✨ ¡Inscripciones Completas en 3 dias! 🏛️ Únete a la lista de espera."
+      "message": "20260119 - Carrera aplazada hasta 2027 debido a las medidas de prevención por la Peste Porcina Africana"
     },
     "nav": {
       "home": "Inicio",
@@ -81,7 +81,7 @@
     },
     "about": {
       "title": "Acerca de",
-      "text": "El sábado 14 de marzo de 2026 comenzará la primera edición de la Backyard Ultra Terrassa. La BYUT nace con la idea de contribuir solidariamente a la comunidad Backyard. Gracias al fantástico terreno de Terrassa, el circuito incluye un desnivel medio y zonas sombreadas cerca del arroyo de la Betzuca (\"Torrent de la Batzuca\").",
+      "text": "En marzo de 2027 (fecha final a confirmar) comenzará la primera edición de la Backyard Ultra Terrassa. La BYUT nace con la idea de contribuir solidariamente a la comunidad Backyard. Gracias al fantástico terreno de Terrassa, el circuito incluye un desnivel medio y zonas sombreadas cerca del arroyo de la Betzuca (\"Torrent de la Batzuca\").",
       "linkPrefix": "Más información en la página oficial:",
       "linkText": "Ficha del evento"
     },
@@ -125,17 +125,17 @@
       "instagram": "Instagram"
     },
     "form": {
-      "title": "Únete a la ista de espera de la BYUT 2026",
-      "subtle": "Inscripciones completas; haz clic en este botón para unirte a la lista de espera",
-      "cta": "Unirte a la lista de espera"
+      "title": "Inscripciones cerradas",
+      "subtle": "Nos vemos en 2027.",
+      "cta": "Cerrado"
     },
     "tooltip": {
-      "text": "Inscripciones completas"
+      "text": "Inscripciones cerradas"
     }
   },
   "en": {
     "news": {
-      "message": "20251130 - ✨ Sold out in 3 days! 🏛️ Join the waiting list."
+      "message": "20260119 - Race postponed until 2027 due to prevention measures for African Swine Fever"
     },
     "nav": {
       "home": "Home",
@@ -148,7 +148,7 @@
     },
     "about": {
       "title": "About",
-      "text": "On Saturday March 14th 2026, the first edition of the Backyard Ultra Terrassa will start. Backyard Ultra Terrassa was born from the idea to contribute to charity and the Backyard community. Thanks to the fantastic terrain around the city of Terrassa, this course includes mid elevation gain and a shadowy terrain close to the Batzuca creek \"Torrent de la Batzuca\".",
+      "text": "March 2027 (date to be confirmed), the first edition of the Backyard Ultra Terrassa will start. Backyard Ultra Terrassa was born from the idea to contribute to charity and the Backyard community. Thanks to the fantastic terrain around the city of Terrassa, this course includes mid elevation gain and a shadowy terrain close to the Batzuca creek \"Torrent de la Batzuca\".",
       "linkPrefix": "Learn more on the official Backyard Ultra page:",
       "linkText": "Event listing"
     },
@@ -192,12 +192,12 @@
       "instagram": "Instagram"
     },
     "form": {
-      "title": "Join the waiting list for BYUT 2026",
-      "subtle": "Registrations Sold Out; click this button to join the waiting list",
-      "cta": "Join Waiting list"
+      "title": "Registrations closed",
+      "subtle": "See you in 2027.",
+      "cta": "Closed"
     },
     "tooltip": {
-      "text": "Registrations Sold Out"
+      "text": "Registrations closed"
     }
   }
 }
